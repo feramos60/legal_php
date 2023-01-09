@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <link rel="icon" type="image/png" href="{{ ruta }}/dist/img/logo_1.png" sizes="16x16">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ ruta }}/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ ruta }}/dist/css/adminlte.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    {% if user %}
+    
+    <div class="wrapper">
+        {% include "user.twig" %}
+
+        {% include "menu_admin.twig" %}
+
+        {% endif %}
+
+            <!-- Main content -->
+            {% block content %}
+            
+            {% endblock %}
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        {% include "footer_base.twig" %}

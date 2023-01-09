@@ -1,0 +1,380 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+	<!-- Brand Logo -->
+	<a href="{{ ruta }}/dashboard/index" class="brand-link">
+		<img src="/torneos/dist/img/logo_1.png" alt="Ecoapplet Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+		<span class="brand-text font-weight-light">LNB</span>
+	</a>
+
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<!-- Sidebar user panel (optional) -->
+		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+			<div class="image">
+				<img {% if user.userimg %} src="/liga/App/user/{{ user.userimg }}" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %} class="img-circle elevation-2" alt="User Image">
+			</div>
+			<div class="info">
+				<a href="/torneos/profile/show" class="d-block">{{ user.first_name }}</a>
+			</div>
+		</div>
+
+
+		<!-- SidebarSearch Form -->
+		<div class="form-inline">
+			<div class="input-group" data-widget="sidebar-search">
+				<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+				<div class="input-group-append">
+					<button class="btn btn-sidebar">
+						<i class="fas fa-search fa-fw"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+				
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 8 %}
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-user"></i>
+								<p>							
+									Roles									
+									<i class="fas fa-angle-left right"></i>
+									{#<span class="badge badge-info right">6</span>#}
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/roles/index" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Roles y Permisos</p>
+									</a>
+								</li>
+							</ul>							
+						</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 1 %}
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-address-card"></i>
+								<p>							
+									Registro Deportivo									
+									<i class="fas fa-angle-left right"></i>
+									{#<span class="badge badge-info right">6</span>#}
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/renovacion/index" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Activar Renovación</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/renovacion/registro" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Renovar Registro</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/renovacion/registro" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Histórico Registro</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 2 %}
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-edit"></i>
+								<p>
+									Opciones de Usuarios
+									<i class="fas fa-angle-left right"></i>
+									{#<span class="badge badge-info right">6</span>#}
+								</p>
+							</a>
+							
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/usuarios/index" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Editar Usuario</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/usuarios/nuevoclub" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Crear Club</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/usuarios/editclub" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Ver - Editar Club</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/usuarios/nuevonada" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Crear Nadador</p>
+									</a>
+								</li>
+							</ul>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/usuarios/editnada" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Ver - Editar Nadador</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/usuarios/competencia" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Subir Datos Nadadores</p>
+									</a>
+								</li>
+							</ul>
+							
+						</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 3 %}
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-copy"></i>
+								<p>
+									Admin del sistema
+									<i class="fas fa-angle-left right"></i>
+									{#<span class="badge badge-info right">6</span>#}
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/Admin/resultados" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Subir resultados torneo</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/Admin/tiempos" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Editar Tiempos</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/admin/index" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Creación de Torneos</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/admin/listar" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Editar Torneos</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/Hygen/index" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Generar Hy3</p>
+									</a>
+								</li>							
+							</ul>							
+						</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 4 %}
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="nav-icon fas fa-edit"></i>
+								<p>
+									Información
+									<i class="fas fa-angle-left right"></i>
+								</p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/torneos/Profile/club" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Información del Club</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/torneos/Profile/listado" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Nadadores</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 5 %}
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-swimming-pool"></i>
+							<p>
+								Torneos
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">							
+							
+														
+							<li class="nav-item">
+								<a href="/torneos/torneo/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Inscripción Torneos</p>
+								</a>
+							</li>							
+							<li class="nav-item">
+								<a href="/torneos/torneo/resumen" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Resumen Inscripciones</p>
+								</a>
+							</li>							
+							
+						</ul>
+					</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 6 %}
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-swimmer"></i>			
+							<p>
+								Reportes
+								<i class="right fas fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="/torneos/ranking/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Ranking</p>
+								</a>
+							</li>			
+						</ul>
+					</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 7 %}
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas  fa-signal"></i>
+							<p>
+								Puntajes
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							
+							<li class="nav-item">
+								<a href="/torneos/puntajes/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Subir Puntajes</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/torneos/puntajes/listar" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Ver Puntajes General</p>
+								</a>
+							</li>					
+							<li class="nav-item">
+								<a href="/torneos/puntajes/promedio" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Ver Puntajes Promedio</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 9 %}
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas  fa-address-card"></i>
+							<p>
+								Registro Club
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">							
+							<li class="nav-item">
+								<a href="/torneos/registro/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Renovar</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/torneos/registro/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>HV Nadadores</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/torneos/registro/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>HV Entrenadores</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/torneos/registro/index" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Certificaciones</p>
+								</a>
+							</li>
+							
+						</ul>
+					</li>
+					{% endif %}	
+				{% endfor %}
+
+				{% for modulo in session.permissions  %}
+					{% if modulo.module_id == 10 %}
+					{% endif %}	
+				{% endfor %}		
+				
+		
+			</ul>
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</aside>

@@ -1,0 +1,63 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Inscripciones{% endblock %}
+
+{% block subtitle %}Descargar HY3 Clubes{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">        
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Clubes Inscritos en el Torneo</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="clubes" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Id del Club</th>
+                <th>Nombre del Club</th>
+                <th>Hombres</th>
+                <th>Mujeres</th>
+                <th>Total</th>
+                <th>Seleccionar</th>
+                                
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>
+                <th>Id del Club</th>
+                <th>Nombre del Club</th>
+                <th>Hombres</th>
+                <th>Mujeres</th>
+                <th>Total</th>                
+                <th>Seleccionar</th>
+                
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+            
+{% include "footer_dataTable.twig" %}        
+
+{% endblock %}

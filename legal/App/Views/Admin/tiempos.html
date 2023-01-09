@@ -1,0 +1,77 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Editar Tiempo{% endblock %}
+
+{% block subtitle %}Editar Tiempo{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">  
+        {% for message in flash_messages %}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-{{ message.type }} text-center" role="alert">
+							{{ message.body }}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{# estos son los mensajes Flash #}      
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Tiempos</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="tiempos" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Identificación</th>
+                <th>Nombre del Nadador</th>
+                <th>Prueba</th>
+                <th>Tiempo</th>
+                <th>Torneo</th>
+                <th>Fecha del Torneo</th>
+                <th>Edición</th>
+                <th>Acción</th>                               
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>
+                <th>Identificación</th>
+                <th>Nombre del Nadador</th>
+                <th>Prueba</th>
+                <th>Tiempo</th>
+                <th>Torneo</th>
+                <th>Fecha del Torneo</th>
+                <th>Edición</th>
+                <th>Acción</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+            
+       
+{% include "modal_time.twig" %} 
+{% endblock %}

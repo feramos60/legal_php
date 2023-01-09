@@ -1,0 +1,71 @@
+{% extends 'logup_arg.twig' %}
+
+{% block title %}Restablecimiento de Contraseña{% endblock %}
+
+{% block body %}
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="../login/index" class="h1"><b>Admin</b>LTE</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Restablecer Contraseña</p>      
+
+      <form action="../reset-password" method="post" id="formPassword">
+        <input type="hidden" name="token" value="{{ token }}" />
+
+        {% if user.errors['longitud_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['longitud_pass'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['letra_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['letra_pass'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['numero_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['numero_pass'] }}                   
+          </div>      
+        {% endif %}
+        <div class="col-12">
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" >
+        </div>
+        </div>       
+
+        {% if user.errors['validacion'] is not empty %}
+          <div class="text-danger">                                              
+            {{ user.errors['validacion'] }}                   
+          </div>
+        {% endif %}
+        {% if user.errors['validacion1'] is not empty %}
+          <div class="text-danger">                                              
+            {{ user.errors['validacion1'] }}                   
+          </div>
+        {% endif %}
+
+        <div class="row">
+          
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Restablecer contraseña</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>      
+
+      <a href="../Login/index" class="text-center">Ya estoy registrado</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box --> 
+
+{% endblock %}

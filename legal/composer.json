@@ -1,0 +1,15 @@
+{
+    "require": {
+        "twig/twig": "^3.0",
+        "phpmailer/phpmailer": "^6.5",
+        "phpoffice/phpspreadsheet": "^1.22",
+        "enyo/dropzone": "^5.9",
+        "mpdf/mpdf": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/"
+        }
+    }
+}

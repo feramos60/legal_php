@@ -1,0 +1,66 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Club
+{% endblock %}
+
+{% block subtitle %}Info Club
+{% endblock %}
+{% block miga %}Datos del Club
+{% endblock %}
+
+{% block content %}
+	<!-- Content Wrapper. Contains page content -->
+	<!-- Main content -->
+		<section class="content"> <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+
+					<!-- Profile Image -->
+
+					<!-- /.card -->
+
+					<!-- About Me Box -->
+						<div class="card card-primary"> <div class="card-header">
+							<h3 class="card-title">Datos del Club</h3>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							<strong><i class="fas fa-user-circle mr-1"></i>Nombre del Club</strong>
+							<p class="text-muted">{{ club.nombre_club }}</p>
+
+							<hr>
+
+							<strong><i class="fas fa-book mr-1"></i>Abreviatura</strong>
+							<p class="text-muted">{{ club.abreviatura }}</p>
+
+							<hr>
+
+							<strong><i class="fas fa-map-marker-alt mr-1"></i>País</strong>
+							<p class="text-muted">{{ club.pais }}</p>
+
+							<hr>
+
+							<strong><i class="fas  fa-pencil-alt mr-1"></i>Correo Electrónico</strong>
+							<p class="text-muted">{{ club.email }}</p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-file-alt mr-1"></i>Liga</strong>
+							<p class="text-muted">{{ club.nombre_liga }}</p>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+
+
+{% endblock %}

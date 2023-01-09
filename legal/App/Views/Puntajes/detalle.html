@@ -1,0 +1,73 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Puntajes del Club{% endblock %}
+
+{% block subtitle %}Puntajes del Club{% endblock %}
+{% block miga %}Puntajes del Club{% endblock %}
+
+{% block content %}
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+
+					{% for message in flash_messages %}
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="alert alert-{{ message.type }} text-center" role="alert">
+										{{ message.body }}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{# estos son los mensajes Flash #}
+
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Puntaje del Club</h3>
+						</div>
+
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="general1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+                                        <th>Club</th>
+										<th>Torneo</th>
+										<th>Genero</th>
+										<th>Puntaje</th>
+										<th>Detalle</th>
+										<th>Acción</th>
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+                                        <th>Club</th>
+										<th>Troneo</th>
+										<th>Genero</th>
+										<th>Puntaje</th>
+										<th>Detalle</th>
+										<th>Acción</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% include "footer_dataTable.twig" %}{% endblock %}

@@ -1,0 +1,593 @@
+{# esta parte es del modal #}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+{# fin de la parte es del modal #}
+
+<script>
+
+    $(document).on("click", "#btn-sm1", function () {
+        var id = $(this).data('id');
+        
+        $("#id").val(id);
+        
+    })
+</script>
+
+
+<form action="{{ ruta }}/Profile/upnadador" enctype="multipart/form-data" method="post" id="formProfile">
+    <div class="modal fade" id="modal-sm1">
+        <div class="modal-dialog modal-sm1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ingrese el tiempo</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    <label for="exampleInputFile" class="col-sm-3 col-form-label">Imagen</label>
+                                    <div class="input-group col-sm-9">
+                                        <div class="custom-file">
+                                            <input type="file" name="foton" class="custom-file-input" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Seleccione la Imagen</label>
+                                        </div>                            
+                                    </div>
+                                </div>                               
+                               
+                                <div class="modal-body">
+                                    <input type="hidden" id="id" name="id_nadador" value="id"><br>                       
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Subir Foto</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        
+    </div>
+    <!-- /.modal -->
+</form>
+
+<!-- bs-custom-file-input -->
+<script src="{{ ruta }}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+<footer class="main-footer">
+    <strong>Copyright &copy; {{ "now"|date("Y") }} <a href="https://ecoapplet.co">Ecoapplet</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Versión</b> {{ version }}
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+
+<!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="{{ ruta }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="{{ ruta }}/dist/js/adminlte.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ ruta }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<script src="{{ ruta }}/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ ruta }}/dist/js/demo.js"></script>
+<!-- Page specific script -->
+
+
+<script src="{{ ruta }}/js/hideShowPassword.min.js"></script>
+    <script src="{{ ruta }}/js/app.js"></script>
+
+
+<!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ ruta }}/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+
+<!-- Bootstrap 4 -->
+<script src="{{ ruta }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="{{ ruta }}/dist/js/adminlte.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ ruta }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ ruta }}/dist/js/demo.js"></script>
+
+
+
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+
+
+
+
+<!-- Page specific script -->
+
+
+<script>
+
+    $(function () {
+
+
+
+        
+        $('#consolinada').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getConsolinada",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre_club" },
+                { "data": "nombre" },
+                { "data": "apellido" },
+                { "data": "metros" },
+                { "data": "estilo" },
+                { "data": "jornada" },
+                { "data": "sesion" },
+                { "data": "numero" },
+                { "data": "hora" },
+                { "data": "tiempo_1" },
+                { "data": "ingresar" },
+                { "data": "eliminar" }                                
+            ],
+            language: {
+                "aria": {
+                    "sortAscending": "Activar para ordenar la columna de manera ascendente",
+                    "sortDescending": "Activar para ordenar la columna de manera descendente"
+                },
+                "autoFill": {
+                    "cancel": "Cancelar",
+                    "fill": "Rellene todas las celdas con <i>%d&lt;\\\/i&gt;<\/i>",
+                    "fillHorizontal": "Rellenar celdas horizontalmente",
+                    "fillVertical": "Rellenar celdas verticalmente"
+                },
+                "buttons": {
+                    "collection": "Colección",
+                    "colvis": "Visibilidad",
+                    "colvisRestore": "Restaurar visibilidad",
+                    "copy": "Copiar",
+                    "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+                    "copySuccess": {
+                        "1": "Copiada 1 fila al portapapeles",
+                        "_": "Copiadas %d fila al portapapeles"
+                    },
+                    "copyTitle": "Copiar al portapapeles",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pageLength": {
+                        "-1": "Mostrar todas las filas",
+                        "1": "Mostrar 1 fila",
+                        "_": "Mostrar %d filas"
+                    },
+                    "pdf": "PDF",
+                    "print": "Imprimir"
+                },
+                "decimal": ",",
+                "emptyTable": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "infoThousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "loadingRecords": "Cargando...",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "searchBuilder": {
+                    "add": "Añadir condición",
+                    "button": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "clearAll": "Borrar todo",
+                    "condition": "Condición",
+                    "data": "Data",
+                    "deleteTitle": "Eliminar regla de filtrado",
+                    "leftTitle": "Criterios anulados",
+                    "logicAnd": "Y",
+                    "logicOr": "O",
+                    "rightTitle": "Criterios de sangría",
+                    "title": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "value": "Valor",
+                    "conditions": {
+                        "date": {
+                            "after": "Después",
+                            "before": "Antes",
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "number": {
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "gt": "Mayor a",
+                            "gte": "Mayor o igual a",
+                            "lt": "Menor que",
+                            "lte": "Menor o igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "string": {
+                            "contains": "Contiene",
+                            "empty": "Vacío",
+                            "endsWith": "Termina con",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notEmpty": "Nop vacío",
+                            "startsWith": "Inicia con"
+                        },
+                        "array": {
+                            "equals": "Igual a",
+                            "empty": "Vacío",
+                            "contains": "Contiene",
+                            "not": "Diferente",
+                            "notEmpty": "No vacío",
+                            "without": "Sin"
+                        }
+                    }
+                },
+                "searchPanes": {
+                    "clearMessage": "Borrar todo",
+                    "collapse": {
+                        "0": "Paneles de búsqueda",
+                        "_": "Paneles de búsqueda (%d)"
+                    },
+                    "count": "{total}",
+                    "emptyPanes": "Sin paneles de búsqueda",
+                    "loadMessage": "Cargando paneles de búsqueda",
+                    "title": "Filtros Activos - %d",
+                    "countFiltered": "{shown} ({total})"
+                },
+                "select": {
+                    "1": "%d fila seleccionada",
+                    "_": "%d filas seleccionadas",
+                    "cells": {
+                        "1": "1 celda seleccionada",
+                        "_": "$d celdas seleccionadas"
+                    },
+                    "columns": {
+                        "1": "1 columna seleccionada",
+                        "_": "%d columnas seleccionadas"
+                    }
+                },
+                "thousands": ",",
+                "zeroRecords": "No se encontraron resultados",
+                "datetime": {
+                    "previous": "Anterior",
+                    "hours": "Horas",
+                    "minutes": "Minutos",
+                    "seconds": "Segundos",
+                    "unknown": "-",
+                    "amPm": [
+                        "am",
+                        "pm"
+                    ],
+                    "next": "Siguiente"
+                },
+                "editor": {
+                    "close": "Cerrar",
+                    "create": {
+                        "button": "Nuevo",
+                        "title": "Crear Nuevo Registro",
+                        "submit": "Crear"
+                    },
+                    "edit": {
+                        "button": "Editar",
+                        "title": "Editar Registro",
+                        "submit": "Actualizar"
+                    },
+                    "remove": {
+                        "button": "Eliminar",
+                        "title": "Eliminar Registro",
+                        "submit": "Eliminar",
+                        "confirm": {
+                            "_": "¿Está seguro que desea eliminar %d filas?",
+                            "1": "¿Está seguro que desea eliminar 1 fila?"
+                        }
+                    },
+                    "error": {
+                        "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\\\\\/a&gt;).&lt;\\\/a&gt;<\/a>"
+                    },
+                    "multi": {
+                        "title": "Múltiples Valores",
+                        "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+                        "restore": "Deshacer Cambios",
+                        "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+                    }
+                }
+
+            },
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#consolinada_wrapper .col-md-6:eq(0)');
+
+
+        $('#listado').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/profile/getListado",
+                "dataSrc": ""
+            },
+            "columns": [                
+                { "data": "nuip" },
+                { "data": "nadaimg" },
+                { "data": "apellido" },
+                { "data": "nombre" },
+                { "data": "genero" },
+                { "data": "edad" },
+                { "data": "fecha_nac" },
+                { "data": "status" }
+            ],
+            language: {
+                "aria": {
+                    "sortAscending": "Activar para ordenar la columna de manera ascendente",
+                    "sortDescending": "Activar para ordenar la columna de manera descendente"
+                },
+                "autoFill": {
+                    "cancel": "Cancelar",
+                    "fill": "Rellene todas las celdas con <i>%d&lt;\\\/i&gt;<\/i>",
+                    "fillHorizontal": "Rellenar celdas horizontalmente",
+                    "fillVertical": "Rellenar celdas verticalmente"
+                },
+                "buttons": {
+                    "collection": "Colección",
+                    "colvis": "Visibilidad",
+                    "colvisRestore": "Restaurar visibilidad",
+                    "copy": "Copiar",
+                    "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+                    "copySuccess": {
+                        "1": "Copiada 1 fila al portapapeles",
+                        "_": "Copiadas %d fila al portapapeles"
+                    },
+                    "copyTitle": "Copiar al portapapeles",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pageLength": {
+                        "-1": "Mostrar todas las filas",
+                        "1": "Mostrar 1 fila",
+                        "_": "Mostrar %d filas"
+                    },
+                    "pdf": "PDF",
+                    "print": "Imprimir"
+                },
+                "decimal": ",",
+                "emptyTable": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "infoThousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "loadingRecords": "Cargando...",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "searchBuilder": {
+                    "add": "Añadir condición",
+                    "button": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "clearAll": "Borrar todo",
+                    "condition": "Condición",
+                    "data": "Data",
+                    "deleteTitle": "Eliminar regla de filtrado",
+                    "leftTitle": "Criterios anulados",
+                    "logicAnd": "Y",
+                    "logicOr": "O",
+                    "rightTitle": "Criterios de sangría",
+                    "title": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "value": "Valor",
+                    "conditions": {
+                        "date": {
+                            "after": "Después",
+                            "before": "Antes",
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "number": {
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "gt": "Mayor a",
+                            "gte": "Mayor o igual a",
+                            "lt": "Menor que",
+                            "lte": "Menor o igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "string": {
+                            "contains": "Contiene",
+                            "empty": "Vacío",
+                            "endsWith": "Termina con",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notEmpty": "Nop vacío",
+                            "startsWith": "Inicia con"
+                        },
+                        "array": {
+                            "equals": "Igual a",
+                            "empty": "Vacío",
+                            "contains": "Contiene",
+                            "not": "Diferente",
+                            "notEmpty": "No vacío",
+                            "without": "Sin"
+                        }
+                    }
+                },
+                "searchPanes": {
+                    "clearMessage": "Borrar todo",
+                    "collapse": {
+                        "0": "Paneles de búsqueda",
+                        "_": "Paneles de búsqueda (%d)"
+                    },
+                    "count": "{total}",
+                    "emptyPanes": "Sin paneles de búsqueda",
+                    "loadMessage": "Cargando paneles de búsqueda",
+                    "title": "Filtros Activos - %d",
+                    "countFiltered": "{shown} ({total})"
+                },
+                "select": {
+                    "1": "%d fila seleccionada",
+                    "_": "%d filas seleccionadas",
+                    "cells": {
+                        "1": "1 celda seleccionada",
+                        "_": "$d celdas seleccionadas"
+                    },
+                    "columns": {
+                        "1": "1 columna seleccionada",
+                        "_": "%d columnas seleccionadas"
+                    }
+                },
+                "thousands": ",",
+                "zeroRecords": "No se encontraron resultados",
+                "datetime": {
+                    "previous": "Anterior",
+                    "hours": "Horas",
+                    "minutes": "Minutos",
+                    "seconds": "Segundos",
+                    "unknown": "-",
+                    "amPm": [
+                        "am",
+                        "pm"
+                    ],
+                    "next": "Siguiente"
+                },
+                "editor": {
+                    "close": "Cerrar",
+                    "create": {
+                        "button": "Nuevo",
+                        "title": "Crear Nuevo Registro",
+                        "submit": "Crear"
+                    },
+                    "edit": {
+                        "button": "Editar",
+                        "title": "Editar Registro",
+                        "submit": "Actualizar"
+                    },
+                    "remove": {
+                        "button": "Eliminar",
+                        "title": "Eliminar Registro",
+                        "submit": "Eliminar",
+                        "confirm": {
+                            "_": "¿Está seguro que desea eliminar %d filas?",
+                            "1": "¿Está seguro que desea eliminar 1 fila?"
+                        }
+                    },
+                    "error": {
+                        "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\\\\\/a&gt;).&lt;\\\/a&gt;<\/a>"
+                    },
+                    "multi": {
+                        "title": "Múltiples Valores",
+                        "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+                        "restore": "Deshacer Cambios",
+                        "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+                    }
+                }
+
+            },
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#listado_wrapper .col-md-6:eq(0)');
+        
+
+    });
+</script>
+
+</body>
+
+</html>

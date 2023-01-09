@@ -1,0 +1,139 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Editar Puntaje{% endblock %}
+
+{% block subtitle %}Editar Puntaje{% endblock %}
+{% block miga %}Editar Puntaje{% endblock %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- /.col -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <h1>Editar Puntaje</h1>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="" id="settings">
+                                <form class="form-horizontal" action="{{ ruta }}/puntajes/update" method="post" id="formProfile">
+
+                                    <div class="form-group row">
+                                        <label for="user_name" class="col-sm-2 col-form-label">Año</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="year"
+                                                placeholder="Año del Torneo"
+                                                value="{{ registro.year }}"
+                                                required
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="first_name" class="col-sm-2 col-form-label">Nombre del Club</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="club"
+                                                placeholder="Nombre del Club" value="{{ registro.club }}"
+                                                required
+                                            >
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="last_name" class="col-sm-2 col-form-label">Nombre del Torneo</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="torneo"
+                                                placeholder="Apellidos" value="{{ registro.tournament }}"
+                                                required
+                                            >
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-2 col-form-label">Puntos</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="puntos" placeholder="Puntos del Torneo"
+                                                value="{{ registro.points }}">
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" id="id" name="id" value="{{ registro.id }}">
+                                    
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Editar Registro</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script src="{{ ruta }}/js/hideShowPassword.min.js"></script>
+<script src="{{ ruta }}/js/app.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var userId = '{{ user.id }}';
+
+        /**
+         * Validate the form
+         */
+        $('#formProfile').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: "../account/validate-email",
+                        data: {
+                            ignore_id: function () {
+                                return userId;
+                            }
+                        }
+                    }
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'email already taken'
+                }
+            }
+        });
+
+        /**
+          * Show password toggle button
+          */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+
+{% endblock %}

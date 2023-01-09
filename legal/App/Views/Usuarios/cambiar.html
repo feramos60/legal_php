@@ -1,0 +1,215 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Editar Club{% endblock %}
+
+{% block subtitle %}Editar Club{% endblock %}
+{% block miga %}Perfil de Club{% endblock %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="{{ ruta }}/dist/img/logo_1.png"
+                                alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center">{{ clubes.nombre_club }}</h3>
+
+                        <p class="text-muted text-center">Club</p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Datos del Club</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i>Abreviatura</strong>
+
+                        <p class="text-muted">
+                            {{ clubes.abreviatura }}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i>País</strong>
+
+                        <p class="text-muted">{{ clubes.pais }}</p>
+
+                        <hr>
+
+                        
+                        <strong><i class="far fa-file-alt mr-1"></i> Correo Electrónico</strong>
+
+                        <p class="text-muted">{{ clubes.email }}</p>
+
+                        <hr>
+
+                        
+                        <strong><i class="far fa-flag mr-1"></i>Liga</strong>
+
+                        <p class="text-muted">{{ clubes.nombre_liga }}</p>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <h1>Editar Club</h1>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+
+
+                            <div class="" id="settings">
+                                <form class="form-horizontal" action="{{ ruta }}/usuarios/updateclub" method="post" id="formProfile">
+
+                                    <div class="form-group row">
+                                        <label for="user_name" class="col-sm-2 col-form-label">Nombre del Club</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="nombre_club"
+                                                placeholder="Identificación del Usuario"
+                                                value="{{clubes.nombre_club}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="first_name" class="col-sm-2 col-form-label">Abreviatura</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" maxlength="4" pattern="[A-Z]{2,4}" class="form-control" name="abreviatura"
+                                                placeholder="Nombres" value="{{clubes.abreviatura}}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="last_name" class="col-sm-2 col-form-label">País</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" maxlength="4" pattern="[A-Z]{2,4}" class="form-control" name="pais"
+                                                placeholder="Apellidos" value="{{clubes.pais}}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-2 col-form-label">Correo Electrónico</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" name="email" placeholder="Email"
+                                                value="{{clubes.email}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="liga" class="col-sm-2 col-form-label">Liga del Club</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" name="id_liga" required>
+                                                <option value="{{clubes.id_liga}}"> {{clubes.nombre_liga}}</option>
+                                                {% for clubi in ligas %}
+                                                <option value="{{clubi.id}}">{{ clubi.nombre_liga}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-2 col-form-label">Editar Tiempos</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" name="time" required>
+                                                <option value="{{clubes.time}}"> {% if clubes.time == 1 %}ACTIVADO{% else %}DESACTIVADO{% endif %}</option>
+                                                {% if clubes.time == 1 %}
+                                                <option value="0">DESACTIVAR</option>
+                                                {% else %}
+                                                <option value="1">ACTIVAR</option>
+                                                {% endif %}                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Editar Club</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script src="{{ ruta }}/js/hideShowPassword.min.js"></script>
+<script src="{{ ruta }}//js/app.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var userId = '{{ user.id }}';
+
+        /**
+         * Validate the form
+         */
+        $('#formProfile').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: '../account/validate-email',
+                        data: {
+                            ignore_id: function () {
+                                return userId;
+                            }
+                        }
+                    }
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'email already taken'
+                }
+            }
+        });
+
+        /**
+          * Show password toggle button
+          */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+
+{% endblock %}

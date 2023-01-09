@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+
+  <link rel="icon" type="image/png" href="{{ ruta }}/dist/img/logo_1.png" sizes="16x16">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ ruta }}/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+
+  <!-- Font Awesome -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/fontawesome-free/css/all.min.css">
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/daterangepicker/daterangepicker.css">
+	<!-- Tempusdominus Bootstrap 4 -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	
+	<!-- iCheck -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+	<!-- JQVMap -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/jqvmap/jqvmap.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{ ruta }}/dist/css/adminlte.min.css">
+	<!-- overlayScrollbars -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+	
+	<!-- summernote -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/summernote/summernote-bs4.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="{{ ruta }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="{{ ruta }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+	
+	<!-- Bootstrap Color Picker -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+	
+	<!-- Select2 -->
+
+	<!-- Bootstrap4 Duallistbox -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+	<!-- BS Stepper -->
+	<link rel="stylesheet" href="{{ ruta }}/plugins/bs-stepper/css/bs-stepper.min.css">
+
+	<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/js/tempusdominus-bootstrap-4.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/css/tempusdominus-bootstrap-4.min.css" crossorigin="anonymous" />
+
+	<!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ ruta }}/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ ruta }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="{{ ruta }}/dist/img/logo_1.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
+    {% include "user.twig" %}
+
+    {% include "menu_admin.twig" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">{% block subtitle %}{% endblock %}</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{ ruta }}/dashboard/index">Inicio</a></li>
+                <li class="breadcrumb-item active">{% block miga %}{% endblock %}</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+
+      {% block content %}
+
+      {% endblock %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+
+   

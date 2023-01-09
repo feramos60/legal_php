@@ -1,0 +1,203 @@
+{% extends 'reportes.twig' %}
+
+{% block title %}Ranking{% endblock %}
+
+{% block subtitle %}Inscribirse en un torneo
+{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}
+
+	<!-- Content Wrapper. Contains page content -->
+	<div>
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>
+							Reportes Natación Carreras
+							<small>Ranking</small>
+						</h1>
+					</div>
+
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-12">
+						<h4>Consulte en la pestaña correspondiente
+							<small>Natación Carreras</small>
+						</h4>
+					</div>
+				</div>
+				<!-- ./row -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card card-primary card-tabs">
+							<div class="card-header p-0 pt-1">
+								<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Ranking</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Historial Deportivo</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Historial Deportivo Comparado</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Récords</a>
+									</li>
+								</ul>
+							</div>
+							<div class="card-body">
+								<div class="tab-content" id="custom-tabs-one-tabContent">
+									<div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+
+										<form action="index"  method="post">
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label>Fechas:</label>
+
+														<div class="input-group">
+															<div class="input-group-prepend">
+																<span class="input-group-text">
+																	<i class="far fa-calendar-alt"></i>
+																</span>
+															</div>
+															<input type="text" name="fecha" class="form-control float-right" id="reservation">
+														</div>
+														<!-- /.input group -->
+													</div>
+												</div>
+
+												<div class="col-sm-6">
+													<!-- radio -->
+													<div class="form-group clearfix">
+														<label>Genero:</label>
+														<div class="input-group">
+															<div class="icheck-primary d-inline col-sm-4">
+																<input type="radio" id="radioPrimary1" name="genero" value="F" checked>
+																<label for="radioPrimary1">Femenimo
+																</label>
+															</div>
+															<div class="icheck-success d-inline col-sm-4">
+																<input type="radio" id="radioSuccess2" name="genero" value="M">
+																<label for="radioSuccess2">Masculino
+																</label>
+															</div>
+														{#	<div class="icheck-warning d-inline col-sm-4">
+																<input type="radio" id="radioWarning3" name="genero" value="X">
+																<label for="radioWarning3">Mixto</label>
+															</div> #}
+														</div>
+													</div>
+												</div>											
+
+											</div>
+											<div class="row">
+												<div class="form-group col-sm-6">
+													<label for="categoria" class="m-0">Categoria:</label>
+													<select id="categoria" name="categoria" class="form-control">														
+														<option selected value="10">10 AÑOS</option>
+														<option value="11">11 AÑOS</option>
+														<option value="12">12 AÑOS</option>
+														<option value="13">13 AÑOS</option>
+														<option value="14">14 AÑOS</option>
+														<option value="15">15 AÑOS</option>
+														<option value="16">16 AÑOS</option>
+														<option value="17">17 AÑOS</option>
+														<option value="18">18 AÑOS</option>
+														<option value="19">19 AÑOS</option>
+														<option value="20">20 AÑOS</option>
+														<option value="21">21 AÑOS</option>
+														<option value="22">22 AÑOS</option>
+														<option value="23">23 AÑOS</option>
+														<option value="24">24 AÑOS</option>
+														<option value="25">25 AÑOS</option>
+														<option value="26">26 AÑOS</option>														
+													</select>
+												</div>
+												<div class="form-group col-sm-6">
+													<label for="prueba" class="m-0">Event:</label>
+													<select id="prueba" name="prueba" class="form-control">
+														<option value="2" selected="selected">50M Libre/50M Free</option>
+														<option value="3">100M Libre/100M Free</option>
+														<option value="4">200M Libre/200M Free</option>
+														<option value="5">400M Libre/400M Free</option>
+														<option value="6">800M Libre/800M Free</option>
+														<option value="7">1500M Libre/1500M Free</option>
+														<option value="9">50M Espalda/50M Back</option>
+														<option value="10">100M Espalda/100M Back</option>
+														<option value="11">200M Espalda/200M Back</option>
+														<option value="13">50M Pecho/50M Breast</option>
+														<option value="14">100M Pecho/100M Breast</option>
+														<option value="15">200M Pecho/200M Breast</option>
+														<option value="17">50M Mariposa/50M Fly</option>
+														<option value="18">100M Mariposa/100M Fly</option>
+														<option value="19">200M Mariposa/200M Fly</option>
+														<option value="21">200M Comb.ind/200M Medley</option>
+														<option value="22">400M Comb.ind/400M Medley</option>
+													</select>
+												</div>
+											</div>
+											<div class="card-footer d-flex justify-content-center align-items-center">
+												<button type="submit" class="btn btn-primary">Ver Ranking</button>
+											</div>
+										</form>
+
+                                        <div class="row">
+                                            <div class="card-body">
+                                                <table id="filtro" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ranking</th>
+                                                            <th>Prueba</th>
+                                                            <th>Club</th>
+                                                            <th>Fecha</th>
+                                                            <th>Tiempo</th>                                                            
+                                                            <th>Puntos Fina</th>
+                                                            <th>Fecha de Nacimiento</th>
+															<th>Nombre</th>                                                            
+                                                        </tr>
+                                                    </thead>
+        
+                                                </table>
+                                            </div>
+                                        </div>
+
+									</div>
+									<div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+										En construcción.
+									</div>
+									<div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+										En construcción.
+									</div>
+									<div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+										En construcción.
+									</div>
+								</div>
+							</div>
+							<!-- /.card -->
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+{% endblock %}

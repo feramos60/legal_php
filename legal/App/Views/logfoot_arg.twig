@@ -1,0 +1,119 @@
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script src="../../dist/js/hideShowPassword.min.js"></script>
+<script src="../../dist/js/app.js"></script>
+<script>  
+    
+    $.validator.addMethod('validUser',
+        function(value, element, param) {
+            if (value != '') {
+                if (value.match(/^[0-9]{4,16}$/) == null) {
+                    return false;
+                }                
+            }
+
+            return true;
+        },
+        'Debe contener solo números y mínimo 4'
+    );
+
+  $(document).ready(function() {
+
+      $('#formSignup').validate({
+          rules: {
+              user_name: {
+                required: true,
+                minlength: 4,
+                validUser: true 
+              },
+              first_name: {
+                required: true,
+                minlength: 2                 
+              },
+              last_name: {
+                required: true,
+                minlength: 2                 
+              },
+              email: {
+                  required: true,
+                  email: true,
+                  remote: "../account/validate-email"
+              },
+              password: {
+                  required: true,
+                  minlength: 6,
+                  validPassword: true
+              }
+          },
+          messages: {
+            user_name: {
+            required: "Por favor ingrese su número de identificación",
+            minlength: jQuery.validator.format("Debe ingresar mínimo {0} números como usuario!")            
+            },
+            first_name: {
+            required: "Por favor ingrese en este campo su nombre",
+            minlength: jQuery.validator.format("Debe ingresar mínimo {0} caracteres en nombre!")            
+            },
+            last_name: {
+            required: "Por favor ingrese en este campo su apellido",
+            minlength: jQuery.validator.format("Debe ingresar mínimo {0} caracteres en apellido!")            
+            },
+            email: {
+            required: "Por favor ingrese un correo electrónico valido",
+            email: "Debe ingresar un correo electrónico usuario@dominio.com",
+            remote: "El correo electrónico ingresado ya existe!"            
+            },
+            password: {
+            required: "Por favor ingrese contraseña segura aquí",
+            minlength: jQuery.validator.format("Debe ingresar mínimo {0} caracteres en password!")                     
+            }
+         }
+      });
+      $('#formForgot').validate({
+            rules: {         
+                password: {
+                    required: "Por favor ingrese contraseña segura aquí",
+                    minlength: jQuery.validator.format("Debe ingresar mínimo {0} caracteres en password!")                     
+                    }
+                
+            },
+            messages: {
+            email: {
+            required: "Por favor ingrese un correo electrónico valido",
+            email: "Debe ingresar un correo electrónico usuario@dominio.com"            
+            }
+        }
+        });
+        $('#formPassword').validate({
+            rules: {         
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+                
+            },
+            messages: {
+                password: {
+                    required: "Por favor ingrese contraseña segura aquí",
+                    minlength: jQuery.validator.format("Debe ingresar mínimo {0} caracteres en password!")                     
+                    }
+        }
+        });
+      $('#inputPassword').hideShowPassword({
+        show: false,
+        innerToggle: 'focus',
+        toggle: {
+          className: 'my-toggle'
+        }
+      });
+  });
+</script>
+
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>

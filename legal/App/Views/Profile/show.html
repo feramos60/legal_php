@@ -1,0 +1,316 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block subtitle %}Perfil{% endblock %}
+{% block miga %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+  
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle" {% if user.userimg %} src="/liga/App/user/{{ user.userimg }}" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %} class="img-circle" alt="User Image">
+                   
+                  </div>
+  
+                  <h3 class="profile-username text-center">{{ user.first_name }} {{ user.last_name }}</h3>
+  
+                  <p class="text-muted text-center">{% if user.role_id == 1 %}SuperAdmin{% elseif user.role_id == 2 %}Admin {% else %} Delegado{% endif %}</p>                  
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+  
+              <!-- About Me Box -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Datos de Usuario</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <strong><i class="fas fa-book mr-1"></i>Identificación</strong>
+  
+                  <p class="text-muted">
+                    {{ user.user_name }}
+                  </p>
+  
+                  <hr>
+  
+                  <strong><i class="fas fa-map-marker-alt mr-1"></i>Nombre del Club</strong>
+  
+                  <p class="text-muted">{{ user.first_name }}</p>
+  
+                  <hr>
+  
+                  <strong><i class="fas fa-pencil-alt mr-1"></i>Nombre del Entrenador</strong>
+  
+                  <p class="text-muted">
+                    {{ user.last_name }}
+                  </p>
+  
+                  <hr>
+  
+                  <strong><i class="far fa-file-alt mr-1"></i> Correo Electrónico</strong>
+  
+                  <p class="text-muted">{{ user.email }}</p>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Editar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Club</a></li>
+                                        
+                  </ul>
+                </div><!-- /.card-header -->
+
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane" id="activity">
+                      <div class="row">
+                        <div class="col-md-12">
+                
+                          <!-- Profile Image -->
+                
+                          <!-- /.card -->
+                
+                          <!-- About Me Box -->
+                            <div class="card card-primary"> <div class="card-header">
+                              <h3 class="card-title">Datos del Club</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                              <strong><i class="fas fa-user-circle mr-1"></i>Nombre del Club</strong>
+                              <p class="text-muted">{{ club.nombre_club }}</p>
+                
+                              <hr>
+                
+                              <strong><i class="fas fa-book mr-1"></i>Abreviatura</strong>
+                              <p class="text-muted">{{ club.abreviatura }}</p>
+                
+                              <hr>
+                
+                              <strong><i class="fas fa-map-marker-alt mr-1"></i>País</strong>
+                              <p class="text-muted">{{ club.pais }}</p>
+                
+                              <hr>
+                
+                              <strong><i class="fas  fa-pencil-alt mr-1"></i>Correo Electrónico</strong>
+                              <p class="text-muted">{{ club.email }}</p>
+                
+                                            <hr>
+                
+                                            <strong><i class="fas fa-file-alt mr-1"></i>Liga</strong>
+                              <p class="text-muted">{{ club.nombre_liga }}</p>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- /.tab-pane -->
+
+  
+                    <div class="active tab-pane" id="settings">
+                      <form class="form-horizontal" enctype="multipart/form-data" action="{{ ruta }}/profile/update"  method="post" id="formProfile">
+
+                        {% if user.errors['user_name'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['user_name'] }}                   
+                            </div>      
+                        {% endif %}
+                        {% if user.errors['error_user'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['error_user'] }}                   
+                            </div>      
+                        {% endif %}
+                        <div class="form-group row">
+                          <label for="user_name" class="col-sm-2 col-form-label">Identificación</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="user_name" placeholder="Identificación del Usuario" value="{{user.user_name}}" required>
+                          </div>
+                        </div>
+
+                        {% if user.errors['first_name'] is not empty %}
+                        <div class="text-danger">                                              
+                            {{ user.errors['first_name'] }}                   
+                        </div>      
+                        {% endif %}
+                        {% if user.errors['error_letran'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['error_letran'] }}                   
+                            </div>      
+                        {% endif %}
+                        <div class="form-group row">
+                          <label for="first_name" class="col-sm-2 col-form-label">Nombre del Club</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="first_name" placeholder="Nombres" value="{{user.first_name}}" required>
+                          </div>
+                        </div>
+
+                        {% if user.errors['last_name'] is not empty %}
+                            <div class="text-danger">
+                                {{ user.errors['last_name'] }}                   
+                            </div>      
+                        {% endif %}
+                        {% if user.errors['error_letrap'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['error_letrap'] }}                   
+                            </div>      
+                        {% endif %}
+                        <div class="form-group row">
+                          <label for="last_name" class="col-sm-2 col-form-label">Nombre del Entrenador</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" name="last_name" placeholder="Apellidos" value="{{user.last_name}}" required>
+                          </div>
+                        </div>
+
+                        {% if user.errors['email'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['email'] }}                   
+                            </div>      
+                        {% endif %}
+                        <div class="form-group row">
+                          <label for="email" class="col-sm-2 col-form-label">Correo Electrónico</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" placeholder="Email" value="{{user.email}}" required>
+                          </div>
+                        </div>
+
+                        {% if user.errors['longitud_pass'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['longitud_pass'] }}                   
+                            </div>      
+                        {% endif %}
+                        {% if user.errors['letra_pass'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['letra_pass'] }}                   
+                            </div>      
+                        {% endif %}
+                        {% if user.errors['numero_pass'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['numero_pass'] }}                   
+                            </div>      
+                        {% endif %}
+                        <div class="form-group row">
+                          <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+                          <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" aria-describedby="helpBlock">
+                            <span id="helpBlock">Deje en blanco para mantener la contraseña actual</span>
+                          </div>
+                        </div>
+                        {% if user.errors['validacion'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['validacion'] }}                   
+                            </div>
+                        {% endif %}
+                        {% if user.errors['validacion1'] is not empty %}
+                            <div class="text-danger">                                              
+                                {{ user.errors['validacion1'] }}                   
+                            </div>
+                        {% endif %}
+
+                        <input name="role_id" type="hidden" value="">
+                        <input name="club_id" type="hidden" value="">
+
+                        <div class="form-group row">
+                          <label for="exampleInputFile" class="col-sm-2 col-form-label">Img Usuario</label>
+                          <div class="input-group col-sm-10">
+                            <div class="custom-file">
+                              <input type="file" name="foto" class="custom-file-input" id="exampleInputFile">
+                              <label class="custom-file-label" for="exampleInputFile">Seleccione la Imagen</label>
+                            </div>
+                            
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <div class="offset-sm-2 col-sm-10">
+                            <button type="submit" class="btn btn-danger">Guardar</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+      <script src="{{ ruta }}/js/hideShowPassword.min.js"></script>
+    <script src="{{ ruta }}/js/app.js"></script>
+
+    <script>
+        
+        $(document).ready(function() {
+
+            var userId = '{{ user.id }}';
+
+            /**
+             * Validate the form
+             */
+            $('#formProfile').validate({
+                rules: {
+                    name: 'required',
+                    email: {
+                        required: true,
+                        email: true,
+                        remote: {
+                            url: '{{ ruta }}/account/validate-email',
+                            data: {
+                                ignore_id: function() {
+                                    return userId;
+                                }
+                            }
+                        }
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    }
+                },
+                messages: {
+                    email: {
+                        remote: 'email already taken'
+                    }
+                }
+            });
+
+            /**
+              * Show password toggle button
+              */
+            $('#inputPassword').hideShowPassword({
+                show: false,
+                innerToggle: 'focus'
+            });
+        });
+    </script>    
+
+{% endblock %}

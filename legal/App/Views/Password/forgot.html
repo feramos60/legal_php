@@ -1,0 +1,64 @@
+{% extends 'logup.twig' %}
+
+{% block title %}Olvido su Contraseña{% endblock %}
+
+{% block body %}    
+
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+          <div class="card-header text-center">
+            <a href="../login/index" class="h1"><b>LNB</b><br>Liga de Natación de Bogotá</a>
+          </div>
+          <div class="card-body">
+            <p class="login-box-msg">Recuperación de Contraseña</p>      
+      
+            <form action="../password/request-reset" method="post" id="formForgot">
+                          
+      
+              {% if user.errors['email'] is not empty %}
+                <div class="text-danger">                                              
+                    {{ user.errors['email'] }}                   
+                </div>      
+              {% endif %}
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+                <input type="email" class="form-control" name="email" placeholder="Email" value="{{user.email}}" required>
+                
+              </div>
+      
+                    
+              {% if user.errors['validacion'] is not empty %}
+                <div class="text-danger">                                              
+                  {{ user.errors['validacion'] }}                   
+                </div>
+              {% endif %}
+              {% if user.errors['validacion1'] is not empty %}
+                <div class="text-danger">                                              
+                  {{ user.errors['validacion1'] }}                   
+                </div>
+              {% endif %}
+      
+              <div class="row">
+                <div class="col-5">
+                  
+                </div>
+                <!-- /.col -->
+                <div class="col-7">
+                  <button type="submit" class="btn btn-primary btn-block">Recuperar</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>      
+      
+            <a href="../Login/index" class="text-center">Ya estoy registrado</a>
+          </div>
+          <!-- /.form-box -->
+        </div><!-- /.card -->
+      </div>
+      <!-- /.register-box --> 
+
+{% endblock %}

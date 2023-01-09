@@ -1,0 +1,73 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Renovación Registro{% endblock %}
+
+{% block subtitle %}Renovación Registro{% endblock %}
+{% block miga %}Renovación{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        {% for message in flash_messages %}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-{{ message.type }} text-center" role="alert">
+							{{ message.body }}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{# estos son los mensajes Flash #}      
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado por Año</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="registro" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>Año</th>
+                <th>Valor Deportista</th>
+                <th>Valor Club</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>
+                <th>Id</th>
+                <th>Año</th>
+                <th>Valor Deportista</th>
+                <th>Valor Club</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+            
+       
+{% include "footer_dataTable.twig" %} 
+{% endblock %}

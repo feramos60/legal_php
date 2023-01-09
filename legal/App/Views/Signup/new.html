@@ -1,0 +1,153 @@
+{% extends 'logup.twig' %}
+
+{% block title %}Registro Nuevo Usuario{% endblock %}
+
+{% block body %}
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="../login/index" class="h1"><b>LNB</b><br>Inscripción Torneos</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Resgistrarse</p>      
+
+      <form action="../signup/create" method="post" id="formSignup">
+        
+          {% if user.errors['user_name'] is not empty %}
+            <div class="text-danger">                                              
+                {{ user.errors['user_name'] }}                   
+            </div>      
+          {% endif %}
+          {% if user.errors['error_user'] is not empty %}
+            <div class="text-danger">                                              
+                {{ user.errors['error_user'] }}                   
+            </div>      
+          {% endif %}
+        <div class="input-group mb-3">          
+          <div class="input-group"></div>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-id-card-alt"></span>
+            </div>
+          </div>
+          <input type="text" class="form-control" name="user_name" placeholder="Identificación del Usuario" autofocus value="{{user.user_name}}" required>
+          
+        </div> 
+
+        {% if user.errors['first_name'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['first_name'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['error_letran'] is not empty %}
+            <div class="text-danger">                                              
+                {{ user.errors['error_letran'] }}                   
+            </div>      
+          {% endif %}
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <input type="text" class="form-control" name="first_name" placeholder="Nombre del Club" value="{{user.first_name}}" required>
+          
+        </div>
+
+        {% if user.errors['last_name'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['last_name'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['error_letrap'] is not empty %}
+            <div class="text-danger">                                              
+                {{ user.errors['error_letrap'] }}                   
+            </div>      
+          {% endif %}
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <input type="text" class="form-control" name="last_name" placeholder="Nombre del Entrenador" value="{{user.last_name}}" required> 
+          
+        </div>
+
+        {% if user.errors['email'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['email'] }}                   
+          </div>      
+        {% endif %}
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+          <input type="email" class="form-control" name="email" placeholder="Email" value="{{user.email}}" required>
+          
+        </div>
+
+        {% if user.errors['longitud_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['longitud_pass'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['letra_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['letra_pass'] }}                   
+          </div>      
+        {% endif %}
+        {% if user.errors['numero_pass'] is not empty %}
+          <div class="text-danger">                                              
+              {{ user.errors['numero_pass'] }}                   
+          </div>      
+        {% endif %}
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
+          
+        </div>       
+
+        {% if user.errors['validacion'] is not empty %}
+          <div class="text-danger">                                              
+            {{ user.errors['validacion'] }}                   
+          </div>
+        {% endif %}
+        {% if user.errors['validacion1'] is not empty %}
+          <div class="text-danger">                                              
+            {{ user.errors['validacion1'] }}                   
+          </div>
+        {% endif %}
+
+        <div class="row">
+          <div class="col-7">
+            <div class="icheck-primary">
+              <input type="checkbox" id="agreeTerms" name="terms" value="aceptar">
+              <label for="agreeTerms">
+               Acepto los<a href="#">Terminos</a>
+              </label>
+            </div>
+          </div>
+          
+          <!-- /.col -->
+          <div class="col-5">
+            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>      
+
+      <a href="../Login/index" class="text-center">Ya estoy registrado</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box --> 
+
+{% endblock %}

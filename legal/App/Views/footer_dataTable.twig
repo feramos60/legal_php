@@ -1,0 +1,725 @@
+<footer class="main-footer">
+    <strong>Copyright &copy; {{ "now"|date("Y") }} <a href="https://ecoapplet.co">Ecoapplet</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Versión</b> {{ version }}
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="{{ ruta }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="{{ ruta }}/dist/js/adminlte.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ ruta }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ ruta }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ ruta }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ ruta }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="{{ ruta }}/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+
+    $(function () {
+
+        const idioma = {
+                "aria": {
+                    "sortAscending": "Activar para ordenar la columna de manera ascendente",
+                    "sortDescending": "Activar para ordenar la columna de manera descendente"
+                },
+                "autoFill": {
+                    "cancel": "Cancelar",
+                    "fill": "Rellene todas las celdas con <i>%d&lt;\\\/i&gt;<\/i>",
+                    "fillHorizontal": "Rellenar celdas horizontalmente",
+                    "fillVertical": "Rellenar celdas verticalmente"
+                },
+                "buttons": {
+                    "collection": "Colección",
+                    "colvis": "Visibilidad",
+                    "colvisRestore": "Restaurar visibilidad",
+                    "copy": "Copiar",
+                    "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+                    "copySuccess": {
+                        "1": "Copiada 1 fila al portapapeles",
+                        "_": "Copiadas %d fila al portapapeles"
+                    },
+                    "copyTitle": "Copiar al portapapeles",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pageLength": {
+                        "-1": "Mostrar todas las filas",
+                        "1": "Mostrar 1 fila",
+                        "_": "Mostrar %d filas"
+                    },
+                    "pdf": "PDF",
+                    "print": "Imprimir"
+                },
+                "decimal": ",",
+                "emptyTable": "No se encontraron resultados",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "infoThousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "loadingRecords": "Cargando...",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "searchBuilder": {
+                    "add": "Añadir condición",
+                    "button": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "clearAll": "Borrar todo",
+                    "condition": "Condición",
+                    "data": "Data",
+                    "deleteTitle": "Eliminar regla de filtrado",
+                    "leftTitle": "Criterios anulados",
+                    "logicAnd": "Y",
+                    "logicOr": "O",
+                    "rightTitle": "Criterios de sangría",
+                    "title": {
+                        "0": "Constructor de búsqueda",
+                        "_": "Constructor de búsqueda (%d)"
+                    },
+                    "value": "Valor",
+                    "conditions": {
+                        "date": {
+                            "after": "Después",
+                            "before": "Antes",
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "number": {
+                            "between": "Entre",
+                            "empty": "Vacío",
+                            "equals": "Igual a",
+                            "gt": "Mayor a",
+                            "gte": "Mayor o igual a",
+                            "lt": "Menor que",
+                            "lte": "Menor o igual a",
+                            "not": "Diferente de",
+                            "notBetween": "No entre",
+                            "notEmpty": "No vacío"
+                        },
+                        "string": {
+                            "contains": "Contiene",
+                            "empty": "Vacío",
+                            "endsWith": "Termina con",
+                            "equals": "Igual a",
+                            "not": "Diferente de",
+                            "notEmpty": "Nop vacío",
+                            "startsWith": "Inicia con"
+                        },
+                        "array": {
+                            "equals": "Igual a",
+                            "empty": "Vacío",
+                            "contains": "Contiene",
+                            "not": "Diferente",
+                            "notEmpty": "No vacío",
+                            "without": "Sin"
+                        }
+                    }
+                },
+                "searchPanes": {
+                    "clearMessage": "Borrar todo",
+                    "collapse": {
+                        "0": "Paneles de búsqueda",
+                        "_": "Paneles de búsqueda (%d)"
+                    },
+                    "count": "{total}",
+                    "emptyPanes": "Sin paneles de búsqueda",
+                    "loadMessage": "Cargando paneles de búsqueda",
+                    "title": "Filtros Activos - %d",
+                    "countFiltered": "{shown} ({total})"
+                },
+                "select": {
+                    "1": "%d fila seleccionada",
+                    "_": "%d filas seleccionadas",
+                    "cells": {
+                        "1": "1 celda seleccionada",
+                        "_": "$d celdas seleccionadas"
+                    },
+                    "columns": {
+                        "1": "1 columna seleccionada",
+                        "_": "%d columnas seleccionadas"
+                    }
+                },
+                "thousands": ",",
+                "zeroRecords": "No se encontraron resultados",
+                "datetime": {
+                    "previous": "Anterior",
+                    "hours": "Horas",
+                    "minutes": "Minutos",
+                    "seconds": "Segundos",
+                    "unknown": "-",
+                    "amPm": [
+                        "am",
+                        "pm"
+                    ],
+                    "next": "Siguiente"
+                },
+                "editor": {
+                    "close": "Cerrar",
+                    "create": {
+                        "button": "Nuevo",
+                        "title": "Crear Nuevo Registro",
+                        "submit": "Crear"
+                    },
+                    "edit": {
+                        "button": "Editar",
+                        "title": "Editar Registro",
+                        "submit": "Actualizar"
+                    },
+                    "remove": {
+                        "button": "Eliminar",
+                        "title": "Eliminar Registro",
+                        "submit": "Eliminar",
+                        "confirm": {
+                            "_": "¿Está seguro que desea eliminar %d filas?",
+                            "1": "¿Está seguro que desea eliminar 1 fila?"
+                        }
+                    },
+                    "error": {
+                        "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\\\\\/a&gt;).&lt;\\\/a&gt;<\/a>"
+                    },
+                    "multi": {
+                        "title": "Múltiples Valores",
+                        "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+                        "restore": "Deshacer Cambios",
+                        "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+                    }
+                }
+            };
+
+
+        $('#example1').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/roles/getRoles",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "description" },
+                { "data": "status" },
+                { "data": "permisos" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        $('#torneos').DataTable({
+            order: [[ 1, "desc"]],
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getTorneos",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre" },
+                { "data": "fecha_ini" },
+                { "data": "fecha_fin" },                
+                { "data": "lugar" },
+                { "data": "seleccionar" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#torneos_wrapper .col-md-6:eq(0)');
+
+        $('#pruebas').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getPruebas",
+                "dataSrc": ""
+            },
+            pageLength: 50,
+            lengthMenu: [5, 10, 20, 50, 100, 200, 500],
+            "columns": [
+                { "data": "jornada" },
+                { "data": "sesion" },
+                { "data": "numero" },
+                { "data": "hora" },
+                { "data": "tipo" },
+                { "data": "metros" },
+                { "data": "estilo" },
+                { "data": "categoria_1" },
+                { "data": "categoria_2" },
+                { "data": "genero" },
+                { "data": "inscribir" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#pruebas_wrapper .col-md-6:eq(0)');
+
+        $('#nadadores').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getNadadores",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "apellido" },
+                { "data": "nombre" },
+                { "data": "genero" },
+                { "data": "edad" },
+                { "data": "inscribir" }                
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#nadadores_wrapper .col-md-6:eq(0)');
+
+
+        $('#nadador').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getNadador",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre" },
+                { "data": "apellido" },
+                { "data": "torneo" },
+                { "data": "prueba_id" },
+                { "data": "fecha_torneo" },
+                { "data": "t" }                                
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            
+        }).buttons().container().appendTo('#nadador_wrapper .col-md-6:eq(0)');
+
+        $('#resumen').DataTable({
+            order: [[ 1, "desc"]],
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getResumen",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre" },
+                { "data": "fecha_ini" },
+                { "data": "fecha_fin" },                
+                { "data": "lugar" },
+                { "data": "seleccionar" }                              
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            
+        }).buttons().container().appendTo('#resumen_wrapper .col-md-6:eq(0)');
+
+        $('#consolidado').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getConsolidado",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre_club" },
+                { "data": "nombre" },
+                { "data": "apellido" },
+                { "data": "metros" },
+                { "data": "estilo" },
+                { "data": "jornada" },
+                { "data": "sesion" },
+                { "data": "numero" },
+                { "data": "hora" },
+                { "data": "tiempo_1" },
+                { "data": "ingresar" },
+                { "data": "eliminar" }                                
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#consolidado_wrapper .col-md-6:eq(0)');
+
+        $('#torneos-hy').DataTable({
+            order: [[ 1, "desc"]],
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/Hygen/getTorneos",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre" },
+                { "data": "fecha_ini" },
+                { "data": "fecha_fin" },                
+                { "data": "lugar" },
+                { "data": "seleccionar" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#torneos_wrapper .col-md-6:eq(0)');
+
+        $('#clubes').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/Hygen/getClubes",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "nombre_club" },
+                { "data": "hombres" },
+                { "data": "mujeres" },
+                { "data": "total" },               
+                { "data": "seleccionar" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#clubes_wrapper .col-md-6:eq(0)');
+
+        $('#usuarios').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/usuarios/getUsuarios",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "user_name" },
+                { "data": "first_name" },
+                { "data": "last_name" },                
+                { "data": "email" },                
+                { "data": "accion" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#usuarios_wrapper .col-md-6:eq(0)');
+
+
+        $('#editclubes').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/Usuarios/getClubes",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "nombre_club" },                
+                { "data": "accion" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#editclubes_wrapper .col-md-6:eq(0)');
+
+        $('#editnada').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/Usuarios/getNadadores",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nuip" },
+                { "data": "apellido" }, 
+                { "data": "nombre" },
+                { "data": "fecha_nac" }, 
+                { "data": "accion" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#editnada_wrapper .col-md-6:eq(0)');
+
+        $('#consolinada').DataTable({
+            
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getConsolinada",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre_club" },
+                { "data": "nombre" },
+                { "data": "apellido" },
+                { "data": "metros" },
+                { "data": "estilo" },
+                { "data": "jornada" },
+                { "data": "sesion" },
+                { "data": "numero" },
+                { "data": "hora" },
+                { "data": "tiempo_1" },
+                { "data": "ingresar" },
+                { "data": "eliminar" }                                
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#consolinada_wrapper .col-md-6:eq(0)');
+
+        $('#lista').DataTable({
+            order: [[ 1, "desc"]],
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/torneo/getLista",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "nombre" },
+                { "data": "fecha_ini" },
+                { "data": "fecha_fin" },                
+                { "data": "lugar" },
+                { "data": "seleccionar" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": true,            
+        }).buttons().container().appendTo('#lista_wrapper .col-md-6:eq(0)');
+
+        $('#general').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/puntajes/getGeneral",
+                "dataSrc": ""
+            },
+            pageLength: 30,
+            lengthMenu: [15, 30, 60, 120],
+            "columns": [
+                {"data": "posicion"},
+                {"data": "club"},
+                {"data": "suma"},
+                {"data": "detalle"}
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#nadadores_wrapper .col-md-6:eq(0)');
+
+        $('#general1').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+            "url": "{{ ruta }}/puntajes/getClub",
+            "dataSrc": ""
+            },
+            pageLength: 30,
+            lengthMenu: [15, 30, 60, 120],
+            "columns": [
+                {"data": "club"},
+                {"data": "tournament"}, 
+                {"data": "gender"}, 
+                {"data": "points"}, 
+                {"data": "detalle"},
+                {"data": "accion"}
+            ],
+            language: idioma,
+            "responsive": true,            "lengthChange": true,            "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#nadadores_wrapper .col-md-6:eq(0)');
+
+        var t = $('#promedio').DataTable({
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    targets: 0,
+                },
+            ],
+            ajax: {
+                    "url": "{{ ruta }}/puntajes/getPromedio",
+                    "dataSrc": ""
+            },
+            pageLength: 25,
+            order: [[2, 'desc']],
+            "columns": [
+                    null,                
+                    {"data": "club"},
+                    {"data": "suma"},
+                    {"data": "detalle"}
+                ],
+            language: idioma,
+            dom: 'lBfrtip',            
+        });
+ 
+        t.on('order.dt search.dt', function () {
+            let i = 1;
+    
+            t.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();     
+
+        
+        
+        $('#detalle').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+            "url": "{{ ruta }}/puntajes/getDetalle",
+            "dataSrc": ""
+            },
+            pageLength: 30,
+            lengthMenu: [15, 30, 60, 120],
+            "columns": [
+                {"data": "club"},
+                {"data": "tournament"},                 
+                {"data": "suma"},
+                {"data": "prom"},
+                {"data": "liga"},
+                {"data": "inactivos"},
+                {"data": "exterior"},
+                {"data": "seleccion"}               
+            ],
+            language: idioma,
+            "responsive": false, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#nadadores_wrapper .col-md-6:eq(0)');
+
+        $('#registro').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/renovacion/getRegistro",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "year" },
+                { "data": "val_dep" },
+                { "data": "val_club" },
+                { "data": "status" },
+                { "data": "accion" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,            
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        $('#modulos').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/roles/getModulos",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "title" },
+                { "data": "description" },
+                { "data": "accion" }
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#modulos_wrapper .col-md-6:eq(0)');
+
+        $('#permisos').DataTable({
+            aProcessing: true,
+            aServerside: true,
+            ajax: {
+                "url": "{{ ruta }}/roles/getPermisos",
+                "dataSrc": ""
+            },
+            "columns": [                
+                { "data": "numero" },
+                { "data": "title" },
+                { "data": "description" },
+            ],
+            language: idioma,
+            "responsive": true, "lengthChange": true, "autoWidth": false,
+            dom: 'lBfrtip',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#permisos_wrapper .col-md-6:eq(0)');
+
+        var table = $('#renovacion').DataTable({
+            
+        aProcessing: true,
+        aServerside: true,
+        ajax: {
+            "url": "{{ ruta }}/Registro/getRenovacion",
+            "dataSrc": ""
+        },
+        "columns": [                
+            { "data": "nuip" },                
+            { "data": "apellido" },
+            { "data": "nombre" },
+            { "data": "genero" },
+            { "data": "fecha_nac" },
+            { "data": "hv", className: "text-center" },
+            { "data": "renovar", className: "text-center" }
+        ],
+        language: idioma,
+        "responsive": true, "lengthChange": true, "autoWidth": false,
+        dom: 'lBfrtip',
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#listado_wrapper .col-md-6:eq(0)');   
+    
+    
+
+    });
+</script>
+
+</body>
+
+</html>

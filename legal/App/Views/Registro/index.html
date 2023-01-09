@@ -1,0 +1,125 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Nadadores{% endblock %}
+
+{% block subtitle %}Listado de Nadadores del Club{% endblock %}
+{% block miga %}Nadadores{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  {% for message in flash_messages %}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-{{ message.type }} text-center" role="alert">
+							{{ message.body }}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{# estos son los mensajes Flash #}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">        
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Nadadores</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <form name="liquidar" id="frm-example" action="{{ ruta }}/registro/procesar" method="post">
+            <table id="renovacion" class="table table-bordered table-striped projects">
+              <thead>
+              <tr>                
+                <th>Identificación</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Genero</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Hoja de Vida</th>
+                <th>Renovación</th>                               
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>                
+                <th>Identificación</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Genero</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Hoja de Vida</th>
+                <th>Renovación</th> 
+              </tr>
+              </tfoot>
+            </table>
+            <p><button type="submit" class="btn btn-primary">Renovar Seleccionados</button></p>
+            <p>
+            <a href="#" id="marcarTodo">Seleccionar todos los Nadadores</a> |
+            <a href="#" id="desmarcarTodo">Deseleccionar todos los Nadadores</a>
+        </p>
+            </form>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('marcarTodo').addEventListener('click', function(e) {
+                e.preventDefault();
+                //seleccionarTodo();
+                checkAll();
+            });
+            document.getElementById('desmarcarTodo').addEventListener('click', function(e) {
+                e.preventDefault();
+                //desmarcarTodo();
+                uncheckAll();
+            });
+        });
+    
+        function seleccionarTodo() {
+            for (let i=0; i < document.liquidar.elements.length; i++) {
+                if(document.liquidar.elements[i].type === "checkbox") {
+                    document.liquidar.elements[i].checked = true;
+                }
+            }
+        }
+    
+        function desmarcarTodo() {
+            for (let i=0; i<document.liquidar.elements.length; i++) {
+                if(document.liquidar.elements[i].type == "checkbox") {
+                    document.liquidar.elements[i].checked = false
+                }
+            }
+        }
+    
+        function checkAll() {
+            document.querySelectorAll('#frm-example input[type=checkbox]').forEach(function(checkElement) {
+                checkElement.checked = true;
+            });
+        }
+    
+        function uncheckAll() {
+            document.querySelectorAll('#frm-example input[type=checkbox]').forEach(function(checkElement) {
+                checkElement.checked = false;
+            });
+        }
+    </script>
+
+
+{% include "footer_dataTable.twig" %}
+{% endblock %}

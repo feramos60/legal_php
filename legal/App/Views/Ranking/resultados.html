@@ -1,0 +1,341 @@
+{% extends "base_ranking.twig" %}
+{% block title %}Ranking - LNB{% endblock %}
+
+{% block subtitle %}Ranking{% endblock %}
+{% block miga %}Ranking{% endblock %}
+
+{% block content %}         
+        
+            <!-- Main content -->
+            <section class="content">
+              <div class="container-fluid">
+                          
+                <!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                  
+                  <section class="col-lg-12 connectedSortable">
+                   {# Content Wrapper. Contains page content #}
+<div class="container-fluid">
+	{# Content Header (Page header) #}
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-12 text-center">
+					<img src="/torneos/dist/img/LIGA_TRANS.png" class="img-fluid" alt="Responsive image" width="20%" height="20%">
+				</div>
+				<div class="col-sm-6">
+					<h1>Reportes Natación Carreras</h1>
+				</div>
+			</div>
+		</div>
+			{# <!-- /.container-fluid -->#}
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row mb-12">
+				<div class="col-12">
+					<h4>Consulte en la pestaña correspondiente <small> Natación Carreras</small></h4>
+				</div>
+			</div>
+
+			{# Inician las pestañas #}
+			<div class="row">
+				<div class="col-12 col-sm-12">
+					<div class="card card-primary card-tabs">
+						<div class="card-header p-0 pt-1">
+								<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="custom-tabs-one-home-tab" href="index" target="_blank" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Ranking</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-profile-tab" href="historial" target="_blank" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Historial Deportivo</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-messages-tab" href="historiado" target="_blank" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Historial Deportivo Comparado</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-settings-tab" href="recordar" target="_blank" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Récords</a>
+									</li>
+								</ul>
+						</div>
+						{# inicio la card de pestañas #}
+						<div class="card-body">
+							{# grupo de contenidos pestaña #}
+							<div class="tab-content" id="custom-tabs-one-tabContent">
+									{# inicio de la pestaña de Ranking #}
+									<div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+										{# Formulario Filtro #}
+										<form action="index" method="post">
+
+											{# Primera Linea del formulario #}
+											<div class="row">
+												{# espacio de tiempo #}
+												<div class='col-md-2'>
+													<div class="form-group">
+														<label for="categoria">Inicio:</label>
+														<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+															<input type="text" value="{{ control.inicio }}" name="inicio" class="form-control datetimepicker-input" data-target="#datetimepicker7" required/>
+															<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+																<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class='col-md-2'>
+													<div class="form-group">
+														<label for="categoria">Fin:</label>
+														<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+															<input type="text" value="{{ control.fin }}" name="fin" class="form-control datetimepicker-input" data-target="#datetimepicker8" required/>
+															<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+																<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+																								
+
+												<div class="form-group col-sm-2">
+													<label for="categoria">Competencia:</label>
+													<select class="form-control" name="torneo">
+														
+														{% if control.torneo != '' %}
+														<option value="{{ control.torneo }}">{{ control.torneo }}</option>
+														<option value="">Todas</option>
+														{% else %}
+														<option value="" selected>Todas</option>
+														{% endif %}
+														
+														{% for competencia in competencias %}
+														
+															<option value="{{ competencia.torneo }}">{{ competencia.torneo }}</option>
+														{% endfor %}
+													</select>
+												</div>
+
+												<div class="form-group col-sm-4">
+													<label>Genero:</label>
+													<div class="input-group">
+														<div class="icheck-primary d-inline col-sm-4">
+															<input type="radio" id="radioPrimary1" name="genero" value="F" checked>
+															<label for="radioPrimary1">Femenino</label>
+														</div>
+														<div class="icheck-success d-inline col-sm-4">
+															<input type="radio" id="radioSuccess2" name="genero" value="M">
+															<label for="radioSuccess2">Masculino</label>
+														</div>
+														<div class="icheck-warning d-inline col-sm-4">
+															<input type="radio" id="radioWarning3" name="genero" value="X">
+															<label for="radioWarning3">Mixto</label>
+														</div>
+													</div>
+													
+												</div>
+												<div class="form-group col-sm-2">
+													<label for="categoria">Categoria:</label>
+													<select id="categoria" name="categoria" class="form-control" required>
+														{% if control.categoria %}
+														<option selected value="{{ control.categoria }}">{{ control.categoria }}</option>														
+														{% endif %}
+														
+														
+														<option value="ABIERTO/OPEN">ABIERTO/OPEN</option>
+														<option value="10">10 AÑOS</option>
+														<option value="11">11 AÑOS</option>
+														<option value="12">12 AÑOS</option>
+														<option value="13">13 AÑOS</option>
+														<option value="14">14 AÑOS</option>
+														<option value="15">15 AÑOS</option>
+														<option value="16">16 AÑOS</option>
+														<option value="16 - 17">16 - 17 AÑOS</option>
+														<option value="17 - 18">17 - 18 AÑOS</option>
+														<option value="18 - MÁS AÑOS">18 - MÁS AÑOS</option>
+														<option value="19 - MÁS AÑOS">19 - MÁS AÑOS</option>
+														<option value="25 - 29">25 - 29 AÑOS</option>
+														<option value="30 - 34">30 - 34 AÑOS</option>
+														<option value="35 - 39">35 - 39 AÑOS</option>
+														<option value="40 - 44">40 - 44 AÑOS</option>
+														<option value="45 - 49">45 - 49 AÑOS</option>
+														<option value="50 - 54">50 - 54 AÑOS</option>
+														<option value="55 - 59">55 - 59 AÑOS</option>
+														<option value="60 - 64">60 - 64 AÑOS</option>
+														<option value="65 - 69">65 - 69 AÑOS</option>
+														<option value="70 - 74">70 - 74 AÑOS</option>
+														<option value="75 - 79">75 - 79 AÑOS</option>
+														<option value="80 - MÁS AÑOS">80 - MÁS AÑOS</option>
+																												
+													</select>
+												</div>
+											</div>
+											{# Fin de la Primera Linea del Formulario #}
+
+											{# Segunda línea del formulario #}
+											<div class="row">
+												<div class="form-group col-sm-3">
+													<label for="categoria">Liga:</label>
+													<select id="liga" name="liga" class="form-control">													
+														<option value="">Todas</option>
+														{% for liga in ligas %}
+															<option value="{{ liga.id }}">{{ liga.nombre_liga }}</option>
+														{% endfor %}														
+													</select>
+												</div>
+												<div class="form-group col-sm-3">
+													<label for="categoria">Equipos:</label>
+													<select id="club" class="form-control" name="club_id">
+																												
+													</select>
+												</div>
+												<div class="form-group col-sm-3">
+													{% if control.prueba == 2 %}
+														{% set foo = '50M Libre/50M Free' %}
+													{% elseif control.prueba == 3 %}
+														{% set foo = '100M Libre/100M Free' %}
+													{% elseif control.prueba == 4 %}
+														{% set foo = '200M Libre/200M Free' %}
+													{% elseif control.prueba == 5 %}
+														{% set foo = '400M Libre/400M Free' %}
+													{% elseif control.prueba == 6 %}
+														{% set foo = '800M Libre/800M Free' %}
+													{% elseif control.prueba == 7 %}
+														{% set foo = '1500M Libre/1500M Free' %}
+													{% elseif control.prueba == 9 %}
+														{% set foo = '50M Espalda/50M Back' %}
+													{% elseif control.prueba == 10 %}
+														{% set foo = '100M Espalda/100M Back' %}
+													{% elseif control.prueba == 11 %}
+														{% set foo = '200M Espalda/200M Back' %}
+													{% elseif control.prueba == 13 %}
+														{% set foo = '50M Pecho/50M Breast' %}
+													{% elseif control.prueba == 14 %}
+														{% set foo = '100M Pecho/100M Breast' %}
+													{% elseif control.prueba == 15 %}
+														{% set foo = '200M Pecho/200M Breast' %}
+													{% elseif control.prueba == 17 %}
+														{% set foo = '50M Mariposa/50M Fly' %}
+													{% elseif control.prueba == 18 %}
+														{% set foo = '100M Mariposa/200M Fly' %}
+													{% elseif control.prueba == 19 %}
+														{% set foo = '200M Mariposa/200M Fly' %}
+													{% elseif control.prueba == 21 %}
+														{% set foo = '200M Comb.ind/200M Medley' %}
+													{% elseif control.prueba == 22 %}
+														{% set foo = '400M Comb.ind/400M Medley' %}																									
+													{% else %}
+													{% set foo = '' %}
+													{% endif %}
+
+													<label for="prueba">Prueba:</label>
+													<select id="prueba" name="prueba" class="form-control" required>
+														{% if control.prueba %}
+														<option value="{{ control.prueba }}" selected="selected">{{ foo }}</option>
+														{% endif %}														
+														<option value="2" >50M Libre/50M Free</option>
+														<option value="3">100M Libre/100M Free</option>
+														<option value="4">200M Libre/200M Free</option>
+														<option value="5">400M Libre/400M Free</option>
+														<option value="6">800M Libre/800M Free</option>
+														<option value="7">1500M Libre/1500M Free</option>
+														<option value="9">50M Espalda/50M Back</option>
+														<option value="10">100M Espalda/100M Back</option>
+														<option value="11">200M Espalda/200M Back</option>
+														<option value="13">50M Pecho/50M Breast</option>
+														<option value="14">100M Pecho/100M Breast</option>
+														<option value="15">200M Pecho/200M Breast</option>
+														<option value="17">50M Mariposa/50M Fly</option>
+														<option value="18">100M Mariposa/100M Fly</option>
+														<option value="19">200M Mariposa/200M Fly</option>
+														<option value="21">200M Comb.ind/200M Medley</option>
+														<option value="22">400M Comb.ind/400M Medley</option>
+													</select>
+												</div>
+												<div class="form-group col-sm-3">
+													<label for="piscina">Piscina:</label>
+													<select id="piscina" name="piscina" class="form-control">
+														<option selected value="LC">LARGA - 50 m - LC</option>
+														<option value="SC">CORTA - 25 m - SC</option>
+													</select>
+												</div>
+											</div>
+											{# Fin Segunda línea del formulario #}
+
+											<div class="card-footer d-flex justify-content-center align-items-center">
+												<button type="submit" class="btn btn-primary">CONSULTAR</button>
+											</div>
+
+										</form>
+										{# Fin Formulario Filtro#}
+
+										{# Inicia la parte que muestra resultados #}
+										<div class="container-fluid">
+											<div class="row">												
+												<div class="col-12">											
+													<div class="card">														
+														<div class="card-header border-bottom-0">
+															<h3 class="card-title">Ranking</h3>
+														</div>
+														<div class="card-body">
+															{% for message in flash_messages %}
+															<div class="container-fluid">
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="alert alert-{{ message.type }} aling-right" role="alert"> 																	
+																			{{ message.body |raw }}																	
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{% endfor %}
+															{# estos son los mensajes Flash #}														
+															<table id="ranking" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Ranking</th>
+																		<th>Prueba</th>
+																		<th>Liga</th>
+																		<th>Club</th>
+																		<th>Fecha</th>
+																		<th>Tiempo</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha de Nacimiento</th>
+																		<th>Nombre</th>
+																	</tr>
+																</thead>	
+															</table>
+														</div>																										
+													</div>
+												</div>													
+											</div>									
+										</div>
+										{# Fin de la muestra de resultados #}
+									</div>
+									{# Fin pestaña Ranking#}
+							</div>
+						</div>
+						{# fin contenidos de las pestañas #}
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+			{# .Fin pestañas #}
+		</div>		
+		<!-- /.container-fluid -->
+	</section>
+		<!-- /.content -->
+</div>
+	<!-- /.content-wrapper -->
+                    
+                  </section>
+                  
+                  
+                </div>
+                <!-- /.row (main row) -->
+              </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+          
+
+{% endblock %}

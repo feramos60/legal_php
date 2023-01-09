@@ -1,0 +1,332 @@
+{% extends 'reportes.twig' %}
+
+{% block title %}Historial Comparado Liga Natación de Bogotá{% endblock %}
+
+{% block content %}
+
+{# Content Wrapper. Contains page content #}
+<div class="container-fluid">
+	{# Content Header (Page header) #}
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-12 text-center">
+					<img src="/torneos/dist/img/LIGA_TRANS.png" class="img-fluid" alt="Responsive image" width="20%" height="20%">
+				</div>
+				<div class="col-sm-6">
+					<h1>Reportes Natación Carreras</h1>
+				</div>
+			</div>
+		</div>
+			{# <!-- /.container-fluid -->#}
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row mb-12">
+				<div class="col-12">
+					<h4>Consulte en la pestaña correspondiente <small> Natación Carreras</small></h4>
+				</div>
+			</div>
+
+			{# Inician las pestañas #}
+			<div class="row">
+				<div class="col-12 col-sm-12">
+					<div class="card card-primary card-tabs">
+						<div class="card-header p-0 pt-1">
+								<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-home-tab" href="index" target="_blank" role="tab" aria-controls="custom-tabs-one-home" aria-selected="false">Ranking</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-profile-tab"  href="histdep" target="_blank" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Historial Deportivo</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link active" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" target="_blank" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="true">Historial Deportivo Comparado</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-settings-tab" href="record" target="_blank" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Récords</a>
+									</li>
+								</ul>
+						</div>
+						{# inicio la card de pestañas #}
+						<div class="card-body">
+							{# grupo de contenidos pestaña #}
+							<div class="tab-content" id="custom-tabs-one-tabContent">
+						
+
+						
+									{# Inicio Pestaña de Historial Deportivo comparado #}
+									<div class="tab-pane fade show active" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
+									
+										<div class="card card-primary card-outline">
+											<div class="card-header">
+												<h3 class="card-title">
+												  <i class="fas fa-search"></i>
+												  Criterios de Búsqueda
+												</h3>
+											</div>
+											<div class="card-body">
+												{# Formulario Filtro Historial #} 
+												<form action="histdepcFilter" method="post">
+
+												{# Primera Linea del formulario Historial deportivo comparado #} 
+													<div class="row">
+														<div class="form-group col-sm-4">
+															<label for="categoria">Nadador(a):</label>
+															<select class="form-control" name="nadador">
+																{% if deportista.nombre != "" %}
+																<option value="{{ deportista.nuip }}"> {{ deportista.apellido }} {{ deportista.nombre }}</option>
+																{% endif %}
+																{% for nadador in nadadores %}
+																<option value="{{ nadador.nuip }}">{{ nadador.apellido }} {{ nadador.nombre }}</option>
+																{% endfor %}
+															</select>
+														</div>
+														<div class="form-group col-sm-4">
+															<label for="categoria">Nadador(a):</label>
+															<select class="form-control" name="nadador1">
+																{% if deportista1.nombre != "" %}
+																<option value="{{ deportista1.nuip }}"> {{ deportista1.apellido }} {{ deportista1.nombre }}</option>
+																{% endif %}
+																{% for nadador in nadadores %}
+																<option value="{{ nadador.nuip }}">{{ nadador.apellido }} {{ nadador.nombre }}</option>
+																{% endfor %}
+															</select>
+														</div>
+													{# espacio de tiempo  #}
+														<div class='col-md-2'>
+															<div class="form-group">
+																<label for="categoria">Año:</label>
+																<div class="input-group date" id="datetimepicker9" data-target-input="nearest">
+																	<input type="text" name="ano" class="form-control datetimepicker-input" data-target="#datetimepicker9"/>
+																	<div class="input-group-append" data-target="#datetimepicker9" data-toggle="datetimepicker">
+																		<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+																	</div>
+																</div>
+															</div>
+														</div>												
+
+														<div class="form-group col-sm-2">
+															<label for="prueba">Prueba:</label>
+															<select id="prueba" name="prueba" class="form-control" required>
+																<option value="2" selected="selected">50M Libre/50M Free</option>
+																<option value="3">100M Libre/100M Free</option>
+																<option value="4">200M Libre/200M Free</option>
+																<option value="5">400M Libre/400M Free</option>
+																<option value="6">800M Libre/800M Free</option>
+																<option value="7">1500M Libre/1500M Free</option>
+																<option value="9">50M Espalda/50M Back</option>
+																<option value="10">100M Espalda/100M Back</option>
+																<option value="11">200M Espalda/200M Back</option>
+																<option value="13">50M Pecho/50M Breast</option>
+																<option value="14">100M Pecho/100M Breast</option>
+																<option value="15">200M Pecho/200M Breast</option>
+																<option value="17">50M Mariposa/50M Fly</option>
+																<option value="18">100M Mariposa/100M Fly</option>
+																<option value="19">200M Mariposa/200M Fly</option>
+																<option value="21">200M Comb.ind/200M Medley</option>
+																<option value="22">400M Comb.ind/400M Medley</option>
+															</select>
+														</div>											
+													</div>
+													{# Fin de la Primera Linea del Formulario  #}
+											
+													<div class="card-footer d-flex justify-content-center align-items-center">
+														<button type="submit" class="btn btn-primary">CONSULTAR</button>
+													</div>
+												</form>
+												{# Fin Formulario Filtro Historial #}
+
+											</div>
+										</div>
+										{% for message in flash_messages %}
+										<div class="container-fluid text-center">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="alert alert-{{ message.type }} aling-right" role="alert">
+														{{ message.body |raw }}
+													</div>
+												</div>
+											</div>
+										</div>
+										{% endfor %}
+										{% if mostrar %}
+										<div class="row justify-content-center">
+											<div class="col-md-6 ">
+											  <!-- Widget: user widget style 2 -->
+											  <div class="card card-widget widget-user-2">
+												<!-- Add the bg color to the header using any of the bg-* classes -->
+												<div class="widget-user-header bg-warning">
+												  <div class="widget-user-image">
+													<img class="img-circle elevation-2" 
+													{% if deportista.nadaimg %} src="/liga/App/nadadores/{{ deportista.nadaimg }}" {% else %} src="../dist/img/white.png" {% endif %} alt="User Avatar">
+												  </div>
+												  <!-- /.widget-user-image -->
+												  <h3 class="widget-user-username">{{ deportista.nombre }} {{ deportista.apellido }}</h3>
+												  <h5 class="widget-user-desc">Nadador(a)</h5>
+												</div>
+												<div class="card-footer p-0">
+												  <ul class="nav flex-column">
+													<li class="nav-item">
+													  <a href="#" class="nav-link">
+														Identificación <span class="float-right badge bg-primary">{{ deportista.nuip }}</span>
+													  </a>
+													</li>
+													<li class="nav-item">
+													  <a href="#" class="nav-link">
+														Genero <span class="float-right badge bg-info">{% if deportista.genero == 'F' %}FEMENINO{% else %}MASCULINO{% endif %}</span>
+													  </a>
+													</li>
+													<li class="nav-item">
+													  <a href="#" class="nav-link">
+														Fecha de Nacimiento <span class="float-right badge bg-success">{{ deportista.fecha_nac|date("d/m/Y") }}</span>
+													  </a>
+													</li>
+													<li class="nav-item">
+													  <a href="#" class="nav-link">
+														Club <span class="float-right badge bg-danger">{{ deportista.nombre_club }}</span>
+													  </a>
+													</li>
+												  </ul>
+												</div>
+											  </div>
+											  <!-- /.widget-user -->
+											</div>
+											<!-- /.col -->
+											
+											<div class="col-md-6 ">
+												<!-- Widget: user widget style 2 -->
+												<div class="card card-widget widget-user-2">
+												  <!-- Add the bg color to the header using any of the bg-* classes -->
+												  <div class="widget-user-header bg-warning">
+													<div class="widget-user-image">
+													  <img class="img-circle elevation-2" 
+													  {% if deportista1.nadaimg %} src="/liga/App/nadadores/{{ deportista1.nadaimg }}" {% else %} src="../dist/img/white.png" {% endif %} alt="User Avatar">
+													</div>
+													<!-- /.widget-user-image -->
+													<h3 class="widget-user-username">{{ deportista1.nombre }} {{ deportista1.apellido }}</h3>
+													<h5 class="widget-user-desc">Nadador(a)</h5>
+												  </div>
+												  <div class="card-footer p-0">
+													<ul class="nav flex-column">
+													  <li class="nav-item">
+														<a href="#" class="nav-link">
+														  Identificación <span class="float-right badge bg-primary">{{ deportista1.nuip }}</span>
+														</a>
+													  </li>
+													  <li class="nav-item">
+														<a href="#" class="nav-link">
+														  Genero <span class="float-right badge bg-info">{% if deportista1.genero == 'F' %}FEMENINO{% else %}MASCULINO{% endif %}</span>
+														</a>
+													  </li>
+													  <li class="nav-item">
+														<a href="#" class="nav-link">
+														  Fecha de Nacimiento <span class="float-right badge bg-success">{{ deportista1.fecha_nac|date("d/m/Y") }}</span>
+														</a>
+													  </li>
+													  <li class="nav-item">
+														<a href="#" class="nav-link">
+														  Club <span class="float-right badge bg-danger">{{ deportista1.nombre_club }}</span>
+														</a>
+													  </li>
+													</ul>
+												  </div>
+												</div>
+												<!-- /.widget-user -->
+											  </div>
+											  <!-- /.col -->
+										</div>
+
+										<div class="card card-primary card-outline">
+											<div class="card-header">
+											  <h3 class="card-title">
+												<i class="fas fa-edit"></i>
+												Historial Comparado
+											  </h3>
+											</div>
+											<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">{{ stilo }}</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="comparado" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+											<div class="card-body">
+											  <h4>PRUEBAS</h4>
+											  <div class="row">
+												<div class="col-12">
+													<div class="tab-content" id="vert-tabs-tabContent">														
+														<div class="tab-pane text-left fade show active" id="vert-tabs-50l" role="tabpanel" aria-labelledby="vert-tabs-50l-tab">															
+															<div class="card-body">
+															<table id="hist" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Torneo</th>
+																		<th>Fecha Torneo</th>
+																		<th>Piscina</th>																		
+																		<th>Puntos Fina</th>																		
+																		<th>Tiempo</th>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Puntos Fina</th>
+																		<th>Piscina</th>
+																		<th>Fecha Torneo</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+												</div>
+											  </div>
+											
+											</div>
+											<!-- /.card -->
+										</div>
+										{% endif %}
+									</div>
+									{# Fin Pestaña de Historial Deportivo comparado #}
+
+							
+							</div>
+						</div>
+						{# fin contenidos de las pestañas #}
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+			{# .Fin pestañas #}
+		</div>		
+		<!-- /.container-fluid -->
+	</section>
+		<!-- /.content -->
+</div>
+	<!-- /.content-wrapper -->
+
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "base_admin.twig" %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Nuevo Nadador</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="{{ ruta }}/usuarios/createnada" method="post">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tipo de Identificación:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2-hidden-accessible" name="tipo"
+                                    style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
+                                    <option value=""> </option>
+                                    <option value="T.I.">T.I. Tarjeta de Identidad</option>
+                                    <option value="C.C.">C.C. Cédula de Ciudadania</option>
+                                    <option value="PASAPORTE">PASAPORTE</option>
+                                    <option value="C.E.">C.E. Cédula de Extranjería</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputApellidos" class="col-sm-3 col-form-label">Identificacion:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="nuip" id="nombre"
+                                    placeholder="Escriba aquí la identificación del nadador" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputApellidos" class="col-sm-3 col-form-label">Apellidos:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="apellido" id="nombre"
+                                    placeholder="Escriba aquí los apellidos del nadador" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputApellidos" class="col-sm-3 col-form-label">Nombres:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="nombre" id="nombre"
+                                    placeholder="Escriba aquí los nombres del nadador" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Genero:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2-hidden-accessible" name="genero"
+                                    style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
+                                    <option value=""> </option>
+                                    <option value="F">FEMENINO</option>
+                                    <option value="M">MÁSCULINO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Date -->
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fecha de Nacimiento:</label>
+                            <div class="input-group date col-sm-9" id="reservationdate" data-target-input="nearest">
+                                <div class="input-group-append" data-target="#reservationdate"
+                                    data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                <input type="text" name="fecha_nac" class="form-control datetimepicker-input"
+                                    data-target="#reservationdate" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Club:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="id_club" required>
+                                    <option value=" "> </option>
+                                    {% for club in clubes %}
+                                    <option value="{{club.id}}" {{ selected }}>{{ club.nombre_club|upper }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Deportista en el Exterior:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="exterior" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Selección Colombia:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="seleccion" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Inactividad en Club:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="inactivo" required>
+                                    <option value=" "> </option>
+                                    <option value="0">Activo </option>
+                                    <option value="1">Inactivo</option>                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="carreras" class="col-sm-3 col-form-label">Carreras:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="carreras" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="clavados" class="col-sm-3 col-form-label">Clavados:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="clavados" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="artistica" class="col-sm-3 col-form-label">Artística:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="artistica" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="polo" class="col-sm-3 col-form-label">Polo Acuatíco:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="polo" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="aguas" class="col-sm-3 col-form-label">Aguas Abiertas:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="aguas" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="master" class="col-sm-3 col-form-label">Master:</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="master" required>
+                                    <option value=" "> </option>
+                                    <option value="1">SI</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Crear Nadador</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+
+<!-- Page specific script -->
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+        //Date and time picker
+
+
+        //Date range picker
+
+        //Date range picker with time picker       
+
+
+
+
+
+
+    })
+        // BS-Stepper Init
+
+
+</script>
+
+
+{% endblock %}

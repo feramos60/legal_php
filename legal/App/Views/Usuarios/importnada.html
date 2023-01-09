@@ -1,0 +1,50 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Importar Nadadores{% endblock %}
+
+{% block subtitle %}Subir Archivo Excel con los Datos de los Nadadores{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}
+
+
+<!-- /.row -->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Subir Nadadores</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form enctype="multipart/form-data" action="../Import/index" method=post>
+              <div class="card-body">            
+                
+                <div class="form-group">
+                  <label for="exampleInputFile">Subir Archivo</label>
+                  <div class="form-group">
+                    <!-- <label for="customFile">Custom File</label> -->
+
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="file" id="customFile">
+                      <label class="custom-file-label" for="customFile">Seleccione o Arrastre y Suelte el Archivo</label>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-success">Cargar</button>
+              </div>
+            </form>
+          </div>
+      <!-- /.card -->
+    </div>
+  </div>
+  <!-- /.row -->
+  </div>
+
+{% endblock %}

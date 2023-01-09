@@ -1,0 +1,486 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Editar Nadador{% endblock %}
+
+{% block subtitle %}Editar Nadador{% endblock %}
+{% block miga %}Perfil de Nadador{% endblock %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" {% if nadador.nadaimg %} src="/liga/App/nadadores/{{ nadador.nadaimg }}" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %}
+                                alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center">{{ nadador.nombre }} {{ nadador.apellido }}</h3>
+
+                        <p class="text-muted text-center">Nadador</p>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Datos del Nadador</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i>Nombres del Nadador</strong>
+
+                        <p class="text-muted">
+                            {{ nadador.nombre }}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-book mr-1"></i>Apellidos del Nadador</strong>
+
+                        <p class="text-muted">
+                            {{ nadador.apellido }}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i>Fecha de Nacimiento</strong>
+
+                        <p class="text-muted">{{ nadador.fecha_nac }}</p>
+
+                        <hr>
+
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i>Género</strong>
+
+                        <p class="text-muted">
+                            {% if nadador.genero == 'F' %}
+                            FEMENINO                            
+                            {% else %}
+                            MÁSCULINO                            
+                            {% endif %}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="far fa-file-alt mr-1"></i>Club</strong>
+
+                        <p class="text-muted">{{ club.nombre_club }}</p>
+
+                        <hr>
+
+                        <strong><i class="far fa-file-alt mr-1"></i>Estado</strong>
+                        <p class="text-muted">
+                            {% if nadador.status != 0 %}
+                            ACTIVO                            
+                            {% else %}
+                            INACTIVO                            
+                            {% endif %}
+                        </p>                        
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <h1>Editar Nadador</h1>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+
+
+                            <div class="" id="settings">
+                                <form class="form-horizontal" action="{{ ruta }}/usuarios/updatenada" method="post" id="formProfile">
+
+                                    <div class="form-group row">
+                                        <label for="user_name" class="col-sm-3 col-form-label">Identificación</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" maxlength="15" class="form-control"
+                                                name="nuip" placeholder="Identificación del Nadador"
+                                                value="{{nadador.nuip}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="user_name" class="col-sm-3 col-form-label">Nombres</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" maxlength="25" pattern="[A-ZÑÁÉÍÓÚ\s]+"
+                                                class="form-control" name="nombre" placeholder="Nombres"
+                                                value="{{ nadador.nombre }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="first_name" class="col-sm-3 col-form-label">Apellidos</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" maxlength="25" pattern="[A-ZÑÁÉÍÓÚ\s]+"
+                                                class="form-control" name="apellido" placeholder="Apellidos"
+                                                value="{{ nadador.apellido}}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="last_name" class="col-sm-3 col-form-label">Género</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="genero" required>
+                                                {% if nadador.genero == 'F' %}
+                                                <option value="{{nadador.genero}}">FEMENINO</option>
+                                                <option value="M">MÁSCULINO</option>
+                                                {% else %}
+                                                <option value="{{nadador.genero}}">MÁSCULINO</option>
+                                                <option value="F">FEMENINO</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Date -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Fecha de Nacimiento:</label>
+                                        <div class="input-group date col-sm-9" id="reservationdate"
+                                            data-target-input="nearest">
+                                            <div class="input-group-append" data-target="#reservationdate"
+                                                data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                            <input type="text" name="fecha_nac"
+                                                class="form-control datetimepicker-input"
+                                                data-target="#reservationdate" value="{{ nadador.fecha_nac }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="exterior" class="col-sm-3 col-form-label">Deportista en Exterior</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="exterior" required>
+                                                {% if nadador.exterior != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.exterior}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="sel_col" class="col-sm-3 col-form-label">Selección Colombia</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="sel_col" required>
+                                                {% if nadador.sel_col != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.sel_col}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inactivo" class="col-sm-3 col-form-label">Inactivo en Club</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="inactivo" required>
+                                                {% if nadador.inactivo != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.inactivo}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="act_liga" class="col-sm-3 col-form-label">Activo Liga</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="act_liga" required>
+                                                {% if nadador.act_liga != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.act_liga}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="act_fede" class="col-sm-3 col-form-label">Federado</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="act_fede" required>
+                                                {% if nadador.act_fede != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.act_fede}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="antig" class="col-sm-3 col-form-label">Antiguo</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="antig" required>
+                                                {% if nadador.antig != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.antig}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <label for="carreras" class="col-sm-3 col-form-label">Carreras</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="carreras" required>
+                                                {% if nadador.carreras != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.carreras}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="clavados" class="col-sm-3 col-form-label">Clavados</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="clavados" required>
+                                                {% if nadador.clavados != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.clavados}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="artistica" class="col-sm-3 col-form-label">Artística</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="artistica" required>
+                                                {% if nadador.artistica != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.artistica}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="polo" class="col-sm-3 col-form-label">Polo Acuatíco</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="polo" required>
+                                                {% if nadador.polo != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.polo}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="aguas" class="col-sm-3 col-form-label">Aguas Abiertas</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="aguas" required>
+                                                {% if nadador.aguas != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.aguas}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="id_club" class="col-sm-3 col-form-label">Club</label>
+                                        <div class="col-sm-9">
+
+                                            <select class="form-control" name="id_club" required>
+                                                <option value="{{ nadador.id_club}}"> {{club.nombre_club}}</option>
+                                                {% for clubi in clubes %}
+                                                <option value="{{clubi.id}}">{{ clubi.nombre_club}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="master" class="col-sm-3 col-form-label">Masters:</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="master" required>
+                                                {% if nadador.master != 0 %}
+                                                <option value="1" selected>SI</option>
+                                                <option value="0">NO</option>
+                                                {% else %}
+                                                <option value="{{nadador.master}}" selected>NO</option>
+                                                <option value="1">SI</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="status" class="col-sm-3 col-form-label">Estado</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="status" required>
+                                                {% if nadador.status == 1 %}
+                                                <option value="{{nadador.status}}" selected>ACTIVO</option>
+                                                <option value="0">INACTIVO</option>
+                                                {% else %}
+                                                <option value="{{nadador.status}}" selected>INACTIVO</option>
+                                                <option value="1">ACTIVO</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="offset-sm-3 col-sm-9">
+                                            <button type="submit" class="btn btn-danger">Editar Nadador</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script src="{{ ruta }}/js/hideShowPassword.min.js"></script>
+<script src="{{ ruta }}/js/app.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var userId = '{{ user.id }}';
+
+        /**
+         * Validate the form
+         */
+        $('#formProfile').validate({
+            rules: {
+                name: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: '/account/validate-email',
+                        data: {
+                            ignore_id: function () {
+                                return userId;
+                            }
+                        }
+                    }
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    validPassword: true
+                }
+            },
+            messages: {
+                email: {
+                    remote: 'email already taken'
+                }
+            }
+        });
+
+        /**
+          * Show password toggle button
+          */
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
+        });
+    });
+</script>
+<!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+
+<!-- Page specific script -->
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+        //Date and time picker
+
+
+        //Date range picker
+
+        //Date range picker with time picker       
+
+
+
+
+
+
+    })
+        // BS-Stepper Init
+
+
+</script>
+
+{% endblock %}

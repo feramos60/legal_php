@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Logueado{% endblock %}
+
+
+
+{% block body %}
+
+    <h1>Logueado</h1>
+    {% if current_user %}
+        Usuario con ID {{ session.user_id }} esta logueado. <a href="{{ ruta }}/logout">Salir</a><br>
+        
+    {% else %}
+        
+        <a href="{{ ruta }}/Signup/new">Registrarse</a> or <a href="{{ ruta }}/Login/index">loguearse</a>.
+    {% endif %}
+
+    
+
+{% endblock %}

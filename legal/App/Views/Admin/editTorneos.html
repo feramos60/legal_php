@@ -1,0 +1,241 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Editar Torneo{% endblock %}
+
+{% block subtitle %}Editar Torneo{% endblock %}
+{% block miga %}Editar Torneo{% endblock %}
+
+{% block content %}
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-5">
+  
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle" {% if user.userimg %} src="{{ ruta }}/dist/img/logo_1.png" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %} class="img-circle" alt="User Image">
+                   
+                  </div>
+  
+                  <h3 class="profile-username text-center">{{ torneo.nombre }}</h3>
+  
+                  <p class="text-muted text-center">Torneo</p>                  
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item"><a href="#settings" data-toggle="tab">Editar</a></li>
+                      
+                                          
+                    </ul>
+                  </div><!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="tab-content">
+                         
+                      <div class="active tab-pane" id="settings">
+                        <form class="form-horizontal" enctype="multipart/form-data" action="{{ ruta }}/admin/updateT"  method="post" id="formProfile">
+
+                          <div class="form-group">
+                            <label for="inputlimit">Limite de Nadadores en Torneo</label>
+                            <input type="number" class="form-control" id="inputlimit" name="limite" min="0" value="{{ torneo.limt }}">
+                            <span>Para ilimitado dejar 0 (cero)</span>
+                          </div>
+  
+                          
+                          {# espacio de tiempo #}
+												<!-- Date -->
+                        <div class="form-group row">
+                          <div>
+                            <label class="col-sm-12 col-form-label">Fecha Cierre Inscripciones:</label>
+                          </div>
+                          
+                          <div class="input-group date col-sm-8" id="reservationdate" data-target-input="nearest">
+                              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                              </div>
+                              <input type="text" name="fecha_cre"
+                                  class="form-control datetimepicker-input"
+                                  data-target="#reservationdate" value="{{ torneo.fecha_cre }}" />
+                          </div>
+                      </div>                                          
+                          <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                              <button type="submit" class="btn btn-danger">Guardar</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                  </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+  
+              <!-- aqui arriba -->
+            </div>
+            <!-- /.col -->
+            <!-- About Me Box -->
+            <div class="card card-primary col-md-7">
+              <div class="card-header">
+                <h3 class="card-title">Datos del Torneo</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-map-marker-alt mr-1"></i>Lugar</strong>
+
+                <p class="text-muted">
+                  {{ torneo.lugar }}
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i>Fecha de Inicio</strong>
+
+                <p class="text-muted">{{ torneo.fecha_ini }}</p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i>Fecha de Fin</strong>
+
+                <p class="text-muted">{{ torneo.fecha_fin }}</p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i>Fecha Cierre de Inscripciones</strong>
+
+                <p class="text-muted">{{ torneo.fecha_cre }}</p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i>Torneo Creado el:</strong>
+
+                <p class="text-muted">
+                  {{ torneo.created_at }}
+                </p>
+
+                <hr>
+
+                
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-danger btn-md" id="btn-sm" data-toggle="modal" data-target="#modal-sm-del" data-dest="tiempitos" data-nom="{{ session.idT }}" href="#" ><i class="fas fa-trash"></i> Eliminar Torneo</a>
+                    </div>
+                  </div>
+                 
+
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+  
+    <script src="{{ ruta }}/js/app.js"></script>
+    <!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+
+
+    <script>
+      $(function () {
+          //Initialize Select2 Elements
+          $('.select2').select2()
+  
+          //Initialize Select2 Elements
+          $('.select2bs4').select2({
+              theme: 'bootstrap4'
+          })
+  
+          //Datemask dd/mm/yyyy
+          $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+          //Datemask2 mm/dd/yyyy
+          $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+          //Money Euro
+          $('[data-mask]').inputmask()
+  
+          //Date picker
+          $('#reservationdate').datetimepicker({
+              format: 'YYYY-MM-DD'
+          });
+  
+          //Date and time picker
+  
+  
+          //Date range picker
+  
+          //Date range picker with time picker       
+  
+  
+  
+  
+  
+  
+      })
+          // BS-Stepper Init
+  
+  
+  </script>
+
+  <script>
+    $(document).on("click", "#btn-sm", function () {
+        var nombre = $(this).data('nom');        
+        $("#nombre").val(nombre);        
+    })
+
+</script>
+
+  <form action="{{ ruta }}/Admin/deleteTor" method="post" id="formProfile">
+    <div class="modal fade" id="modal-sm-del">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content bg-danger">
+          <div class="modal-header">
+            <h4 class="modal-title">Borrar Torneo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1>¿Esta seguro que desea borrar este torneo?</h1>
+                  <span>Esta acción no se podrá dashacer</span>
+                    
+                  <div class="modal-body">
+                    <input type="hidden" id="nombre" name="torneo_borrar">  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-dark">Eliminar Torneo</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  
+    </div>
+    <!-- /.modal -->
+  </form>
+
+{% endblock %}

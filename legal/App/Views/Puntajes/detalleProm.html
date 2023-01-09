@@ -1,0 +1,138 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Puntajes del Club{% endblock %}
+
+{% block subtitle %}Puntajes del Club{% endblock %}
+{% block miga %}Puntajes del Club{% endblock %}
+
+{% block content %}
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+
+					{% for message in flash_messages %}
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="alert alert-{{ message.type }} text-center" role="alert">
+										{{ message.body }}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{# estos son los mensajes Flash #}
+
+                    <div class="container-fluid">
+                        <h5 class="mb-2">Resumen de Nadadores</h5>
+                        <div class="row">
+                          <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+              
+                              <div class="info-box-content">
+                                <span class="info-box-text">Nadadores Liga</span>
+                                <span class="info-box-number">{{ cantidades.total }}</span>
+                              </div>
+                              <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-danger"><i class="far fa-minus-square"></i></span>
+              
+                              <div class="info-box-content">
+                                <span class="info-box-text">Nadadores Inactivos</span>
+                                <span class="info-box-number">{{ cantidades.inactivo.inact }}</span>
+                              </div>
+                              <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                          </div>
+                          <!-- /.col -->
+              
+                          
+                          <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-primary"><i class="far fa-star"></i></span>
+              
+                              <div class="info-box-content">
+                                <span class="info-box-text">Nadadores Extranjero</span>
+                                <span class="info-box-number">{{ cantidades.exterior.exte }}</span>
+                              </div>
+                              <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                          </div>
+                          <!-- /.col -->
+                          
+                          <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                              <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+              
+                              <div class="info-box-content">
+                                <span class="info-box-text">Selección Colombia</span>
+                                <span class="info-box-number">{{ cantidades.seleccion.sel_col }}</span>
+                              </div>
+                              <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                          </div>
+                          <!-- /.col --> 
+                        </div>
+                      </div>
+
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Puntaje del Club</h3>
+						</div>
+
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="detalle" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+                    <th>Club</th>
+										<th>Torneo</th>										
+										<th>Puntaje General</th>
+                    <th>Puntaje Promedio</th>
+                    <th>Deportistas Liga</th>
+                    <th>Deportistas Inactivos</th>
+                    <th>Deportistas Extranjero</th>
+                    <th>Selección Colombia</th>										
+									</tr>
+								</thead>
+
+								<tfoot>
+									<tr>
+                    <th>Club</th>
+										<th>Troneo</th>										
+										<th>Puntaje General</th>
+                    <th>Puntaje Promedio</th>
+                    <th>Deportistas Liga</th>
+                    <th>Deportistas Inactivos</th>
+                    <th>Deportistas Extranjero</th>
+                    <th>Selección Colombia</th>										
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% include "footer_dataTable.twig" %}{% endblock %}

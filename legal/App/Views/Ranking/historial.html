@@ -1,0 +1,2070 @@
+{% extends "base_ranking.twig" %}
+{% block title %}Ranking - LNB{% endblock %}
+
+{% block subtitle %}Ranking{% endblock %}
+{% block miga %}Ranking{% endblock %}
+
+{% block content %}         
+        
+            <!-- Main content -->
+            <section class="content">
+              <div class="container-fluid">
+                          
+                <!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                  
+                  <section class="col-lg-12 connectedSortable">
+                   {# Content Wrapper. Contains page content #}
+                   <div class="container-fluid">
+	{# Content Header (Page header) #}
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-12 text-center">
+					<img src="/torneos/dist/img/LIGA_TRANS.png" class="img-fluid" alt="Responsive image" width="20%" height="20%">
+				</div>
+				<div class="col-sm-6">
+					<h1>Reportes Natación Carreras</h1>
+				</div>
+			</div>
+		</div>
+		{#
+		<!-- /.container-fluid -->#}
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row mb-12">
+				<div class="col-12">
+					<h4>Consulte en la pestaña correspondiente <small> Natación Carreras</small></h4>
+				</div>
+			</div>
+
+			{# Inician las pestañas #}
+			<div class="row">
+				<div class="col-12 col-sm-12">
+					<div class="card card-primary card-tabs">
+						<div class="card-header p-0 pt-1">
+							<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link" id="custom-tabs-one-home-tab" href="index" role="tab" target="_blank" aria-controls="custom-tabs-one-home" aria-selected="false">Ranking</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" id="custom-tabs-one-profile-tab" data-toggle="pill" target="_blank"	href="#custom-tabs-one-profile" role="tab"
+										aria-controls="custom-tabs-one-profile" aria-selected="true">Historial
+										Deportivo</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="custom-tabs-one-messages-tab" href="historiado" role="tab" target="_blank" aria-controls="custom-tabs-one-messages" aria-selected="false">Historial
+										Deportivo Comparado</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="custom-tabs-one-settings-tab" href="recordar" role="tab" target="_blank"	aria-controls="custom-tabs-one-settings" aria-selected="false">Récords</a>
+								</li>
+							</ul>
+						</div>
+						{# inicio la card de pestañas #}
+						<div class="card-body">
+							{# grupo de contenidos pestaña #}
+								<div class="tab-content" id="custom-tabs-one-tabContent">
+
+
+								{# Inicio Pestaña de Historial Deportivo #}
+								<div class="tab-pane fade  show active" id="custom-tabs-one-profile" role="tabpanel"
+									aria-labelledby="custom-tabs-one-profile-tab">
+
+									<div class="card card-primary card-outline">
+										<div class="card-header">
+											<h3 class="card-title">
+												<i class="fas fa-search"></i>
+												Criterios de Búsqueda
+											</h3>
+										</div>
+										<div class="card-body">
+											{# Formulario Filtro Historial #}
+											<form action="historialFilter" method="post">
+
+												{# Primera Linea del formulario Historial #}
+												<div class="row">
+													{# espacio de tiempo #}
+													<div class='col-md-2'>
+													<div class="form-group">
+														<label for="categoria">Inicio: {{ control.inicio }}</label>
+														<div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+															<input type="text" name="inicio" value="{{ control.inicio }}" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+															<div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+																<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+															</div>
+														</div>
+													</div>
+												</div>
+													<div class='col-md-2'>
+														<div class="form-group">
+															<label for="categoria">Fin:</label>
+															<div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+																<input type="text" value="{{ control.fin }}" name="fin" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+																<div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+																	<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group col-sm-3">
+														<label for="categoria">Nadador(a):</label>
+														<select class="form-control" name="nadador">
+															{% if deportista.nombre != "" %}
+																<option value="{{ deportista.nuip }}"> {{ deportista.apellido }} {{ deportista.nombre }}</option>
+																{% endif %}
+															{% for nadador in nadadores %}
+															<option value="{{ nadador.nuip }}">{{ nadador.apellido }} {{ nadador.nombre }}</option>
+															{% endfor %}
+														</select>
+													</div>
+
+													<div class="form-group col-sm-3">
+														<label>Agrupar Mejor Tiempo por Año:</label>
+														<div class="input-group">
+															<div class="icheck-info d-inline col-sm-6">
+																<input type="radio" id="radioPrimary3" name="anual"	value="1" checked>
+																<label for="radioPrimary3">Si</label>
+															</div>
+															<div class="icheck-danger d-inline col-sm-6">
+																<input type="radio" id="radioSuccess4" name="anual"	value="0">
+																<label for="radioSuccess4">No</label>
+															</div>
+														</div>
+													</div>
+													<div class="form-group col-sm-2">
+														<label for="prueba">Prueba:</label>
+														<select id="prueba" name="prueba" class="form-control" required>
+															<option value="1" selected="selected">Todas</option>
+															<option value="2">50M Libre/50M Free</option>
+															<option value="3">100M Libre/100M Free</option>
+															<option value="4">200M Libre/200M Free</option>
+															<option value="5">400M Libre/400M Free</option>
+															<option value="6">800M Libre/800M Free</option>
+															<option value="7">1500M Libre/1500M Free</option>
+															<option value="9">50M Espalda/50M Back</option>
+															<option value="10">100M Espalda/100M Back</option>
+															<option value="11">200M Espalda/200M Back</option>
+															<option value="13">50M Pecho/50M Breast</option>
+															<option value="14">100M Pecho/100M Breast</option>
+															<option value="15">200M Pecho/200M Breast</option>
+															<option value="17">50M Mariposa/50M Fly</option>
+															<option value="18">100M Mariposa/100M Fly</option>
+															<option value="19">200M Mariposa/200M Fly</option>
+															<option value="21">200M Comb.ind/200M Medley</option>
+															<option value="22">400M Comb.ind/400M Medley</option>
+														</select>
+													</div>
+												</div>
+												{# Fin de la Primera Linea del Formulario #}
+
+												<div
+													class="card-footer d-flex justify-content-center align-items-center">
+													<button type="submit" class="btn btn-primary">CONSULTAR</button>
+												</div>
+											</form>
+											{# Fin Formulario Filtro Historial #}
+
+										</div>
+									</div>
+
+									{% for message in flash_messages %}
+									<div class="container-fluid text-center">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="alert alert-{{ message.type }} aling-right" role="alert">
+													{{ message.body |raw }}
+												</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+
+									{% if mostrar %}
+									<div class="row justify-content-center">
+										<div class="col-md-8 ">
+											<!-- Widget: user widget style 2 -->
+											<div class="card card-widget widget-user-2">
+												<!-- Add the bg color to the header using any of the bg-* classes -->
+												<div class="widget-user-header bg-warning">
+													<div class="widget-user-image">
+														<img class="img-circle elevation-2"
+															{% if deportista.nadaimg %} src="/liga/App/nadadores/{{ deportista.nadaimg }}" {% else %} src="../dist/img/white.png" {% endif %} alt="User Avatar">
+													</div>
+													<!-- /.widget-user-image -->
+													<h3 class="widget-user-username">{{ deportista.nombre }} {{ deportista.apellido }}</h3>
+													<h5 class="widget-user-desc">Nadador(a)</h5>
+												</div>
+												<div class="card-footer p-0">
+													<ul class="nav flex-column">
+														<li class="nav-item">
+															<a href="#" class="nav-link">
+																Identificación <span
+																	class="float-right badge bg-primary">{{ deportista.nuip }}</span>
+															</a>
+														</li>
+														<li class="nav-item">
+															<a href="#" class="nav-link">
+																Genero <span class="float-right badge bg-info">{% if deportista.genero == 'F' %}FEMENINO{% else %}MASCULINO{% endif %}</span>
+															</a>
+														</li>
+														<li class="nav-item">
+															<a href="#" class="nav-link">
+																Fecha de Nacimiento <span
+																	class="float-right badge bg-success">{{ deportista.fecha_nac|date("d/m/Y") }}</span>
+															</a>
+														</li>
+														<li class="nav-item">
+															<a href="#" class="nav-link">
+																Club <span
+																	class="float-right badge bg-danger">{{ deportista.nombre_club }}</span>
+															</a>
+														</li>
+														<li class="nav-item">
+															<a href="#" class="nav-link">
+																Liga <span
+																	class="float-right badge bg-danger">{{ deportista.nombre_liga }}</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<!-- /.widget-user -->
+										</div>
+										<!-- /.col -->
+									</div>
+
+									<div class="card card-primary card-outline">
+										<div class="card-header">
+											<h3 class="card-title">
+												<i class="fas fa-edit"></i>
+												HISTORIAL DEPORTIVO
+											</h3>
+										</div>
+										<div class="card-body">
+											<h4>PRUEBAS</h4>
+											<div class="row">
+												<div class="col-5 col-sm-3">
+													<div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+														{% if session.prueba == 1 or session.prueba == 2 %}
+														<a class="nav-link active" id="vert-tabs-50l-tab" data-toggle="pill" href="#vert-tabs-50l" role="tab" aria-controls="vert-tabs-50l" aria-selected="true">50M Libre/50M Free</a>
+														{% endif %}
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-100l-tab" data-toggle="pill" href="#vert-tabs-100l" role="tab" aria-controls="vert-tabs-100l" aria-selected="false">100M Libre/100M Free</a>
+														{% elseif session.prueba == 3 %}
+														<a class="nav-link active" id="vert-tabs-100l-tab" data-toggle="pill" href="#vert-tabs-100l" role="tab" aria-controls="vert-tabs-100l" aria-selected="false">100M Libre/100M Free</a>
+														{% endif %} 
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-200l-tab" data-toggle="pill" href="#vert-tabs-200l" role="tab" aria-controls="vert-tabs-200l" aria-selected="false">200M Libre/200M Free</a>
+														{% elseif session.prueba == 4 %}
+														<a class="nav-link active" id="vert-tabs-200l-tab" data-toggle="pill" href="#vert-tabs-200l" role="tab" aria-controls="vert-tabs-200l" aria-selected="false">200M Libre/200M Free</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-400l-tab" data-toggle="pill" href="#vert-tabs-400l" role="tab" aria-controls="vert-tabs-400l" aria-selected="false">400M Libre/400M Free</a>
+														{% elseif session.prueba == 5 %}
+														<a class="nav-link active" id="vert-tabs-400l-tab" data-toggle="pill" href="#vert-tabs-400l" role="tab" aria-controls="vert-tabs-400l" aria-selected="false">400M Libre/400M Free</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-800l-tab" data-toggle="pill" href="#vert-tabs-800l" role="tab" aria-controls="vert-tabs-800l" aria-selected="false">800M Libre/800M Free</a>
+														{% elseif session.prueba == 6 %}
+														<a class="nav-link active" id="vert-tabs-800l-tab" data-toggle="pill" href="#vert-tabs-800l" role="tab" aria-controls="vert-tabs-800l" aria-selected="false">800M Libre/800M Free</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-1500l-tab" data-toggle="pill" href="#vert-tabs-1500l" role="tab" aria-controls="vert-tabs-1500l" aria-selected="false">1500M Libre/1500M Free</a>
+														{% elseif session.prueba == 7 %}
+														<a class="nav-link active" id="vert-tabs-1500l-tab" data-toggle="pill" href="#vert-tabs-1500l" role="tab" aria-controls="vert-tabs-1500l" aria-selected="false">1500M Libre/1500M Free</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-50e-tab" data-toggle="pill" href="#vert-tabs-50e" role="tab" aria-controls="vert-tabs-50e" aria-selected="false">50M Espalda/50M Back</a>
+														{% elseif session.prueba == 9 %}
+														<a class="nav-link active" id="vert-tabs-50e-tab" data-toggle="pill" href="#vert-tabs-50e" role="tab" aria-controls="vert-tabs-50e" aria-selected="false">50M Espalda/50M Back</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-100e-tab" data-toggle="pill" href="#vert-tabs-100e" role="tab" aria-controls="vert-tabs-100e" aria-selected="false">100M Espalda/100M Back</a>
+														{% elseif session.prueba == 10 %}
+														<a class="nav-link active" id="vert-tabs-100e-tab" data-toggle="pill" href="#vert-tabs-100e" role="tab" aria-controls="vert-tabs-100e" aria-selected="false">100M Espalda/100M Back</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-200e-tab" data-toggle="pill" href="#vert-tabs-200e" role="tab" aria-controls="vert-tabs-200e" aria-selected="false">200M Espalda/200M Back</a>
+														{% elseif session.prueba == 11 %}
+														<a class="nav-link active" id="vert-tabs-200e-tab" data-toggle="pill" href="#vert-tabs-200e" role="tab" aria-controls="vert-tabs-200e" aria-selected="false">200M Espalda/200M Back</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-50p-tab" data-toggle="pill" href="#vert-tabs-50p" role="tab" aria-controls="vert-tabs-50p" aria-selected="false">50M Pecho/50M Breast</a>
+														{% elseif session.prueba == 13 %}
+														<a class="nav-link active" id="vert-tabs-50p-tab" data-toggle="pill" href="#vert-tabs-50p" role="tab" aria-controls="vert-tabs-50p" aria-selected="false">50M Pecho/50M Breast</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-100p-tab" data-toggle="pill" href="#vert-tabs-100p" role="tab" aria-controls="vert-tabs-100p" aria-selected="false">100M Pecho/100M Breast</a>
+														{% elseif session.prueba == 14 %}
+														<a class="nav-link active" id="vert-tabs-100p-tab" data-toggle="pill" href="#vert-tabs-100p" role="tab" aria-controls="vert-tabs-100p" aria-selected="false">100M Pecho/100M Breast</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-200p-tab" data-toggle="pill" href="#vert-tabs-200p" role="tab" aria-controls="vert-tabs-200p" aria-selected="false">200M Pecho/200M Breast</a>
+														{% elseif session.prueba == 15 %}
+														<a class="nav-link active" id="vert-tabs-200p-tab" data-toggle="pill" href="#vert-tabs-200p" role="tab" aria-controls="vert-tabs-200p" aria-selected="false">200M Pecho/200M Breast</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-50m-tab" data-toggle="pill" href="#vert-tabs-50m" role="tab" aria-controls="vert-tabs-50m" aria-selected="false">50M Mariposa/50M Fly</a>
+														{% elseif session.prueba == 17 %}
+														<a class="nav-link active" id="vert-tabs-50m-tab" data-toggle="pill" href="#vert-tabs-50m" role="tab" aria-controls="vert-tabs-50m" aria-selected="false">50M Mariposa/50M Fly</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-100m-tab" data-toggle="pill" href="#vert-tabs-100m" role="tab" aria-controls="vert-tabs-100m" aria-selected="false">100M Mariposa/100M Fly</a>
+														{% elseif session.prueba == 18 %}
+														<a class="nav-link active" id="vert-tabs-100m-tab" data-toggle="pill" href="#vert-tabs-100m" role="tab" aria-controls="vert-tabs-100m" aria-selected="false">100M Mariposa/100M Fly</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-200m-tab" data-toggle="pill" href="#vert-tabs-200m" role="tab" aria-controls="vert-tabs-200m" aria-selected="false">200M Mariposa/200M Fly</a>
+														{% elseif session.prueba == 19 %}
+														<a class="nav-link active" id="vert-tabs-200m-tab" data-toggle="pill" href="#vert-tabs-200m" role="tab" aria-controls="vert-tabs-200m" aria-selected="false">200M Mariposa/200M Fly</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-200c-tab" data-toggle="pill" href="#vert-tabs-200c" role="tab" aria-controls="vert-tabs-200c" aria-selected="false">200M Comb.ind/200M Medley</a>
+														{% elseif session.prueba == 21 %}
+														<a class="nav-link active" id="vert-tabs-200c-tab" data-toggle="pill" href="#vert-tabs-200c" role="tab" aria-controls="vert-tabs-200c" aria-selected="false">200M Comb.ind/200M Medley</a>
+														{% endif %}														
+														
+														{% if session.prueba == 1 %}
+														<a class="nav-link" id="vert-tabs-400c-tab" data-toggle="pill" href="#vert-tabs-400c" role="tab" aria-controls="vert-tabs-400c" aria-selected="false">400M Comb.ind/400M Medley</a>
+														{% elseif session.prueba == 22 %}
+														<a class="nav-link active" id="vert-tabs-400c-tab" data-toggle="pill" href="#vert-tabs-400c" role="tab" aria-controls="vert-tabs-400c" aria-selected="false">400M Comb.ind/400M Medley</a>
+														{% endif %}
+													</div>
+												</div>
+												<div class="col-7 col-sm-9">
+													<div class="tab-content" id="vert-tabs-tabContent">
+														{% if session.prueba == 1 or session.prueba == 2 %}
+														<div class="tab-pane text-left fade show active" id="vert-tabs-50l" role="tabpanel" aria-labelledby="vert-tabs-50l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+														{% if session.prueba == 1 %}														
+														<div class="tab-pane fade" id="vert-tabs-100l" role="tabpanel" aria-labelledby="vert-tabs-100l-tab">															
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 3 %}
+														<div class="tab-pane fade show active" id="vert-tabs-100l" role="tabpanel" aria-labelledby="vert-tabs-100l-tab">
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-200l" role="tabpanel" aria-labelledby="vert-tabs-200l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 4 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200l" role="tabpanel" aria-labelledby="vert-tabs-200l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-400l" role="tabpanel" aria-labelledby="vert-tabs-400l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">400m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="400mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="400l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 5 %}
+														<div class="tab-pane fade show active" id="vert-tabs-400l" role="tabpanel" aria-labelledby="vert-tabs-400l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">400m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="400mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="400l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-800l" role="tabpanel" aria-labelledby="vert-tabs-800l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">800m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="800mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="800l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 6 %}
+														<div class="tab-pane fade show active" id="vert-tabs-800l" role="tabpanel" aria-labelledby="vert-tabs-800l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">800m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="800mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="800l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-1500l" role="tabpanel" aria-labelledby="vert-tabs-1500l-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">1500m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="1500mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="1500l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 7 %}
+														<div class="tab-pane fade show active" id="vert-tabs-1500l" role="tabpanel" aria-labelledby="vert-tabs-1500l-tab"></div>
+														
+														<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">1500m libre</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="1500mlibre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->	
+														<div class="card-body">
+															<table id="1500l" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-50e" role="tabpanel" aria-labelledby="vert-tabs-50e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50e" cclass="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 9 %}
+														<div class="tab-pane fade show active" id="vert-tabs-50e" role="tabpanel" aria-labelledby="vert-tabs-50e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50e" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-100e" role="tabpanel" aria-labelledby="vert-tabs-100e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100e" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 10 %}
+														<div class="tab-pane fade show active" id="vert-tabs-100e" role="tabpanel" aria-labelledby="vert-tabs-100e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100e" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-200e" role="tabpanel" aria-labelledby="vert-tabs-200e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200e" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 11 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200e" role="tabpanel" aria-labelledby="vert-tabs-200e-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m espalda</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mespalda" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200e" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-50p" role="tabpanel" aria-labelledby="vert-tabs-50p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 13 %}
+														<div class="tab-pane fade show active" id="vert-tabs-50p" role="tabpanel" aria-labelledby="vert-tabs-50p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-100p" role="tabpanel" aria-labelledby="vert-tabs-100p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 14 %}
+														<div class="tab-pane fade show active" id="vert-tabs-100p" role="tabpanel" aria-labelledby="vert-tabs-100p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-200p" role="tabpanel" aria-labelledby="vert-tabs-200p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 15 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200p" role="tabpanel" aria-labelledby="vert-tabs-200p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m pecho</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mpecho" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200p" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-50m" role="tabpanel" aria-labelledby="vert-tabs-50m-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 17 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200p" role="tabpanel" aria-labelledby="vert-tabs-200p-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">50m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="50mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="50m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-100m" role="tabpanel" aria-labelledby="vert-tabs-100m-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 18 %}
+														<div class="tab-pane fade show active" id="vert-tabs-100m" role="tabpanel" aria-labelledby="vert-tabs-100m-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">100m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="100mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="100m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-200m" role="tabpanel" aria-labelledby="vert-tabs-200m-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 19 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200m" role="tabpanel" aria-labelledby="vert-tabs-200m-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m mariposa</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mmariposa" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200m" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-200c" role="tabpanel" aria-labelledby="vert-tabs-200c-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m combinado</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mcombinado" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200c" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 21 %}
+														<div class="tab-pane fade show active" id="vert-tabs-200c" role="tabpanel" aria-labelledby="vert-tabs-200c-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">200m combinado</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="200mcombinado" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="200c" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														{% if session.prueba == 1 %}
+														<div class="tab-pane fade" id="vert-tabs-400c" role="tabpanel" aria-labelledby="vert-tabs-400c-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">400m combinado</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="400mcombinado" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="400c" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% elseif session.prueba == 22 %}
+														<div class="tab-pane fade show active" id="vert-tabs-400c" role="tabpanel" aria-labelledby="vert-tabs-400c-tab">
+															
+															<div class="container-fluid">
+																<div class="row">
+																  <!-- /.col (LEFT) -->
+																  <div class="col-md-12">
+																	<!-- LINE CHART -->
+																	<div class="card card-info">
+																	  <div class="card-header">
+																		<h3 class="card-title">400m combinado</h3>
+														
+																		<div class="card-tools">
+																		  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+																			<i class="fas fa-minus"></i>
+																		  </button>
+																		  <button type="button" class="btn btn-tool" data-card-widget="remove">
+																			<i class="fas fa-times"></i>
+																		  </button>
+																		</div>
+																	  </div>
+																	  <div class="card-body">
+																		<div class="chart">
+																		  <canvas id="400mcombinado" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+																		</div>
+																	  </div>
+																	  <!-- /.card-body -->
+																	</div>
+																	<!-- /.card -->														
+																  </div>
+																  <!-- /.col (RIGHT) -->
+																</div>
+																<!-- /.row -->
+															</div><!-- /.container-fluid -->
+															<div class="card-body">
+															<table id="400c" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+																<thead>
+																	<tr>
+																		<th>Categoria</th>
+																		<th>Tiempo</th>
+																		<th>Diferencia en S en S</th>
+																		<th>Puntos Fina</th>
+																		<th>Fecha</th>
+																		<th>Piscina</th>
+																		<th>Torneo</th>																		
+																	</tr>
+																</thead>	
+															</table>
+															</div>
+														</div>
+														{% endif %}
+
+														
+													</div>
+												</div>
+											</div>
+
+									</div>
+										<!-- /.card -->
+									</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{# fin contenidos de las pestañas #}
+					</div>
+					<!-- /.card -->
+			</div>
+			</div>
+			{# .Fin pestañas #}
+		</div>
+		<!-- /.container-fluid -->
+                    
+    </section>
+                  
+                  
+                </div>
+                <!-- /.row (main row) -->
+              </div><!-- /.container-fluid -->
+    	</section>
+            <!-- /.content -->
+          
+
+{% endblock %}

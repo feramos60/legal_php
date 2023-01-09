@@ -1,0 +1,78 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Nadadores{% endblock %}
+
+{% block subtitle %}Listado de Nadadores del Club{% endblock %}
+{% block miga %}Nadadores{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  {% for message in flash_messages %}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-{{ message.type }} text-center" role="alert">
+							{{ message.body }}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{# estos son los mensajes Flash #}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">        
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Nadadores</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="listado" class="table table-bordered table-striped projects">
+              <thead>
+              <tr>
+                <th>Identificación</th>
+                <th>Foto</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Genero</th>
+                <th>Edad</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Estado</th>                               
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>
+                <th>Identificación</th>
+                <th>Foto</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Genero</th>
+                <th>Edad</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Estado</th> 
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+{% include "modal_upload.twig" %} 
+
+{% endblock %}

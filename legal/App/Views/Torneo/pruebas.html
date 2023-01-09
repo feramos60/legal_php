@@ -1,0 +1,195 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Inscripciones{% endblock %}
+
+{% block subtitle %}Inscribir al nadador{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="col-md-12">
+    <!-- Widget: user widget style 1 -->
+    <div class="card card-widget widget-user">
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header bg-info">
+        <h3 class="widget-user-username">{{ nadador.nombre }} {{ nadador. apellido }}</h3>
+        <h5 class="widget-user-desc">Nadador</h5>
+      </div>
+      <div class="widget-user-image">
+        <img class="img-circle elevation-2" {% if nadador.nadaimg %} src="/liga/App/nadadores/{{ nadador.nadaimg }}" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %} alt="User Avatar">
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">{{ nadador.nuip }}</h5>
+              <span class="description-text">IDENTIFICACIÓN</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">{% if nadador.genero == 'F' %}FEMENINO{% else %}MASCULINO{% endif %}</h5>
+              <span class="description-text">GENERO</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4">
+            <div class="description-block">
+              <h5 class="description-header">{{ nadador.fecha_nac }}</h5>
+              <span class="description-text">FECHA DE NACIMIENTO</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+    </div>
+    <!-- /.widget-user -->
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Pruebas</h3>
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            {% for message in flash_messages %}
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="alert alert-{{ message.type }} text-center" role="alert">
+                    {{ message.body }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %} {# estos son los mensajes Flash #}
+
+            <!-- /.card-header -->
+          <div class="card-body">
+            <table id="consolinada" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Club</th>
+                <th>Nombre Nadador</th>
+                <th>Apellido Nadador</th>                
+                <th>Metros</th>
+                <th>Estilo</th>
+                <th>Jornada</th>
+                <th>Sesión</th>
+                <th>Prueba</th>
+                <th>Hora</th>
+                <th>Tiempo Inscripcion</th>
+                <th>Ingresar Tiempo</th>
+                <th>Acción</th>                                               
+              </tr>
+              </thead>          
+              
+            </table>
+          </div>
+          <!-- /.card-body -->
+
+
+            <table id="pruebas" class="table table-bordered table-striped">
+              <div class="row">
+                <div class="col">
+                  <a href="../{{ session.torneo }}/{{ session.max_torneo }}/nadadores">
+                    <button type="button" class="btn btn-primary btn-sm float-right">Inscribir Otro Nadador</button>
+                  </a>
+
+                </div>
+              </div>
+
+              <thead>
+                <tr>
+                  <th>Jornada</th>
+                  <th>Sesión</th>
+                  <th>Prueba</th>
+                  <th>Hora</th>
+                  <th>Tipo</th>
+                  <th>Metros</th>
+                  <th>Estilo</th>
+                  <th>Categoria Inicio</th>
+                  <th>Categoria Fin</th>
+                  <th>Genero</th>
+                  <th>Inscribir</th>
+
+                </tr>
+              </thead>
+
+              <tfoot>
+                <tr>
+                  <th>Jornada</th>
+                  <th>Sesión</th>
+                  <th>Prueba</th>
+                  <th>Hora</th>
+                  <th>Tipo</th>
+                  <th>Metros</th>
+                  <th>Estilo</th>
+                  <th>Categoria Inicio</th>
+                  <th>Categoria Fin</th>
+                  <th>Genero</th>
+                  <th>Inscribir</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tiempos del Nadador</h3>
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="nadador" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Torneo</th>
+                  <th>Prueba</th>
+                  <th>Fecha Torneo</th>
+                  <th>Tiempo</th>
+
+                </tr>
+              </thead>
+
+              <tfoot>
+
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% include "modal_time.twig" %}
+
+
+{% endblock %}

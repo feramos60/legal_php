@@ -1,0 +1,59 @@
+{% extends "base_dataTable.twig" %}
+{% block title %}Roles{% endblock %}
+
+{% block subtitle %}Listado Roles{% endblock %}
+{% block miga %}{% endblock %}
+
+{% block content %}          
+        
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">        
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Listado de Roles</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre del Rol</th>
+                <th>Descripción</th>
+                <th>Asignar Módulo</th>
+                <th>Ver Permisos</th>
+              </tr>
+              </thead>
+              
+              <tfoot>
+              <tr>
+                <th>Id</th>
+                <th>Nombre del Rol</th>
+                <th>Descripción</th>
+                <th>Asignar Módulo</th>
+                <th>Ver Permisos</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+            
+       
+{% include "footer_dataTable.twig" %} 
+{% endblock %}

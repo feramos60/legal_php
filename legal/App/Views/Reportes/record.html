@@ -1,0 +1,198 @@
+{% extends 'reportes.twig' %}
+
+{% block title %}Record Liga Natación de Bogotá{% endblock %}
+
+{% block content %}
+
+{# Content Wrapper. Contains page content #}
+<div class="container-fluid">
+	{# Content Header (Page header) #}
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-12 text-center">
+					<img src="/torneos/dist/img/LIGA_TRANS.png" class="img-fluid" alt="Responsive image" width="20%" height="20%">
+				</div>
+				<div class="col-sm-6">
+					<h1>Reportes Natación Carreras</h1>
+				</div>
+			</div>
+		</div>
+			{# <!-- /.container-fluid -->#}
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row mb-12">
+				<div class="col-12">
+					<h4>Consulte en la pestaña correspondiente <small> Natación Carreras</small></h4>
+				</div>
+			</div>
+
+			{# Inician las pestañas #}
+			<div class="row">
+				<div class="col-12 col-sm-12">
+					<div class="card card-primary card-tabs">
+						<div class="card-header p-0 pt-1">
+								<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-home-tab" href="index" target="_blank" role="tab" aria-controls="custom-tabs-one-home" aria-selected="false">Ranking</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-profile-tab" href="histdep" target="_blank" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Historial Deportivo</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-messages-tab" href="histdepc" target="_blank" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Historial Deportivo Comparado</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link  active" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" target="_blank" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="true">Récords</a>
+									</li>
+								</ul>
+						</div>
+						{# inicio la card de pestañas #}
+						<div class="card-body">
+							{# grupo de contenidos pestaña #}
+							<div class="tab-content" id="custom-tabs-one-tabContent">
+		
+									{# Inicio Pestaña de Record #}
+									<div class="tab-pane fade  show active" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+
+										<div class="card card-primary card-outline">
+											<div class="card-header">
+												<h3 class="card-title">
+													<i class="fas fa-search"></i>
+													Criterios de Búsqueda
+												</h3>
+											</div>
+											<div class="card-body">
+												{# Formulario Filtro Historial #}
+												<form action="record" method="post">
+	
+													{# Primera Linea del formulario Historial #}
+													<div class="row">
+														{# espacio de tiempo #}
+														<div class="form-group col-sm-4">
+															<label>Genero:</label>
+															<div class="input-group">
+																<div class="icheck-primary d-inline col-sm-4">
+																	<input type="radio" id="radioPrimary1" name="genero" value="F" checked>
+																	<label for="radioPrimary1">Femenino</label>
+																</div>
+																<div class="icheck-success d-inline col-sm-4">
+																	<input type="radio" id="radioSuccess2" name="genero" value="M">
+																	<label for="radioSuccess2">Masculino</label>
+																</div>
+																{# <div class="icheck-warning d-inline col-sm-4">
+																	<input type="radio" id="radioWarning3" name="genero" value="X">
+																	<label for="radioWarning3">Mixto</label>
+																</div> #}
+															</div>
+															
+														</div>
+	
+														<div class="form-group col-sm-4">
+															<label for="categoria">Categoria:</label>
+															<select id="categoria" name="categoria" class="form-control" required>
+																<option selected value="{{ control.categoria }}">{{ control.categoria }}</option>
+																<option value="ABIERTO/OPEN">ABIERTO/OPEN</option>
+																<option value="10">10 AÑOS</option>
+																<option value="11">11 AÑOS</option>
+																<option value="12">12 AÑOS</option>
+																<option value="13">13 AÑOS</option>
+																<option value="14">14 AÑOS</option>
+																<option value="15">15 AÑOS</option>
+																<option value="16">16 AÑOS</option>
+																<option value="16 - 17">16 - 17 AÑOS</option>
+																<option value="17 - 18">17 - 18 AÑOS</option>
+																<option value="18 - MÁS AÑOS">18 - MÁS AÑOS</option>
+																<option value="19 - MÁS AÑOS">19 - MÁS AÑOS</option>
+																<option value="25 - 29">25 - 29 AÑOS</option>
+																<option value="30 - 34">30 - 34 AÑOS</option>
+																<option value="35 - 39">35 - 39 AÑOS</option>
+																<option value="40 - 44">40 - 44 AÑOS</option>
+																<option value="45 - 49">45 - 49 AÑOS</option>
+																<option value="50 - 54">50 - 54 AÑOS</option>
+																<option value="55 - 59">55 - 59 AÑOS</option>
+																<option value="60 - 64">60 - 64 AÑOS</option>
+																<option value="65 - 69">65 - 69 AÑOS</option>
+																<option value="70 - 74">70 - 74 AÑOS</option>
+																<option value="75 - 79">75 - 79 AÑOS</option>
+																<option value="80 - MÁS AÑOS">80 - MÁS AÑOS</option>
+																														
+															</select>
+														</div>
+	
+														
+														<div class="form-group col-sm-4">
+															<label for="prueba">Prueba:</label>
+															<select id="prueba" name="prueba" class="form-control" required>
+																<option value="1" selected="selected">Todas</option>
+																<option value="2">50M Libre/50M Free</option>
+																<option value="3">100M Libre/100M Free</option>
+																<option value="4">200M Libre/200M Free</option>
+																<option value="5">400M Libre/400M Free</option>
+																<option value="6">800M Libre/800M Free</option>
+																<option value="7">1500M Libre/1500M Free</option>
+																<option value="9">50M Espalda/50M Back</option>
+																<option value="10">100M Espalda/100M Back</option>
+																<option value="11">200M Espalda/200M Back</option>
+																<option value="13">50M Pecho/50M Breast</option>
+																<option value="14">100M Pecho/100M Breast</option>
+																<option value="15">200M Pecho/200M Breast</option>
+																<option value="17">50M Mariposa/50M Fly</option>
+																<option value="18">100M Mariposa/100M Fly</option>
+																<option value="19">200M Mariposa/200M Fly</option>
+																<option value="21">200M Comb.ind/200M Medley</option>
+																<option value="22">400M Comb.ind/400M Medley</option>
+															</select>
+														</div>
+													</div>
+													{# Fin de la Primera Linea del Formulario #}
+	
+													<div
+														class="card-footer d-flex justify-content-center align-items-center">
+														<button type="submit" class="btn btn-primary">CONSULTAR</button>
+													</div>
+												</form>
+												{# Fin Formulario Filtro Historial #}
+	
+											</div>
+										</div>
+
+
+
+										<div class="card-body">
+											<table id="record" class="table table-bordered table-hover display responsive nowrap" style="width:100%">
+												<thead>
+													<tr>
+														<th>Estilo</th>
+														<th>Nadador</th>
+														<th>Fecha Nac.</th>
+														<th>Club</th>																		
+														<th>Tiempo</th>																		
+														<th>Puntos Fina</th>
+														<th>Fecha Torneo</th>
+														<th>Torneo</th>																													
+													</tr>
+												</thead>	
+											</table>
+											</div>
+									</div>
+									{# Fin Pestaña de Record #}
+							</div>
+						</div>
+						{# fin contenidos de las pestañas #}
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+			{# .Fin pestañas #}
+		</div>		
+		<!-- /.container-fluid -->
+	</section>
+		<!-- /.content -->
+</div>
+	<!-- /.content-wrapper -->
+
+{% endblock %}

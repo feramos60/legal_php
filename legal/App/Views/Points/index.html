@@ -1,0 +1,161 @@
+{% extends 'points.twig' %}
+
+{% block title %}Puntajes
+{% endblock %}
+
+{% block content %}
+
+	{# Content Wrapper. Contains page content #}
+	<div
+		class="container-fluid">
+		{# Content Header (Page header) #}
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-12 text-center">
+						<img src="/torneos/dist/img/LIGA_TRANS.png" class="img-fluid" alt="Responsive image" width="20%" height="20%">
+					</div>
+					<div class="col-sm-6">
+						<h1>Puntajes Natación Carreras</h1>
+					</div>
+				</div>
+			</div>
+			{# <!-- /.container-fluid -->#}
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row mb-12">
+					<div class="col-12">
+						<h4>Consulte en la pestaña correspondiente
+							<small>Puntaje General o Puntaje Promedio</small>
+						</h4>
+					</div>
+				</div>
+
+				{# Inician las pestañas #}
+				<div class="row">
+					<div class="col-12">
+						<div class="card card-primary card-tabs">
+							<div class="card-header p-0 pt-1">
+								<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="true" >Puntaje General</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="false">Puntaje Promedio</a>
+									</li>
+								</ul>
+							</div>
+
+							<div class="card-body">
+								<div class="tab-content" id="custom-tabs-one-tabContent">
+									<div class="tab-pane fade active show" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+										<div class="card">
+											<div class="card-header">
+												<h3 class="card-title">Posiciones Puntaje General</h3>
+											</div>
+											{% if tabla == 1 %}
+												<!-- /.card-header -->
+												<div class="card-body">
+													<table id="general" class="table table-bordered table-striped">
+														<thead>
+															<tr>
+																<th>Posición</th>
+																<th>Club</th>
+																<th>Puntaje</th>
+																<th>Detalle</th>
+															</tr>
+														</thead>
+
+														<tfoot>
+															<tr>
+																<th>Posición</th>
+																<th>Club</th>
+																<th>Puntaje</th>
+																<th>Detalle</th>
+															</tr>
+														</tfoot>
+													</table>
+												</div>
+												<!-- /.card-body -->
+											{% endif %}
+											{% if tabla == 2 %}
+												<!-- /.card-header -->
+												<div class="card-body">
+													<table id="general1" class="table table-bordered table-striped">
+														<div class="col">
+															<a href="../index">
+																<button type="button" class="btn btn-primary btn-lg float-right">Volver</button>
+															</a>
+														</div>
+														<thead>
+															<tr>
+																<th>Club</th>
+																<th>Torneo</th>
+																<th>Genero</th>
+																<th>Puntaje</th>
+															</tr>
+														</thead>
+
+														<tfoot>
+															<tr>
+																<th>Club</th>
+																<th>Torneo</th>
+																<th>Genero</th>
+																<th>Puntaje</th>
+															</tr>
+														</tfoot>
+													</table>
+												</div>
+												<!-- /.card-body -->
+											{% endif %}
+										</div>
+									</div>
+
+									<div class="tab-pane fade" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+										<div class="card-header">
+											<h3 class="card-title">Posiciones Puntaje Promedio</h3>
+										</div>
+										
+											<!-- /.card-header -->
+											<div class="card-body">
+												<table id="promedio" class="table table-bordered table-striped">
+													<thead>
+														<tr>
+															<th></th>
+															<th>Club</th>
+															<th>Puntaje Promedio</th>
+															<th>Detalle</th>
+														</tr>
+													</thead>
+													<tfoot>
+														<tr>
+															<th></th>
+															<th>Club</th>
+															<th>Puntaje Promedio</th>
+															<th>Detalle</th>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+											<!-- /.card-body -->									
+										
+									</div>
+								</div>
+							</div>
+							<!-- /.card -->
+						</div>
+					</div>
+
+				</div>
+				{# .Fin pestañas #}
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+{% endblock %}
