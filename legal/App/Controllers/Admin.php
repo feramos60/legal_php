@@ -164,7 +164,7 @@ class Admin extends Authenticated
                 'torneo' => $this->torneo,
             ]);
         } else {
-            $this->redirect('/torneos/dashboard/index');
+            $this->redirect('/compa/dashboard/index');
         }
     }
 

@@ -80,7 +80,7 @@ class Usuarios extends Authenticated
 
             ]);
         } else {
-            $this->redirect('/torneos/dashboard/index');
+            $this->redirect('/compa/dashboard/index');
         }
     }
 
@@ -226,7 +226,7 @@ class Usuarios extends Authenticated
                 'ligas' => $this->ligas
             ]);
         } else {
-            $this->redirect('/torneos/dashboard/index');
+            $this->redirect('/compa/dashboard/index');
         }
     }
 

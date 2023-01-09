@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="{{ ruta }}/dashboard/index" class="brand-link">
-		<img src="/torneos/dist/img/logo_1.png" alt="Ecoapplet Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+		<img src="{{ ruta }}/dist/img/logo_1.png" alt="Ecoapplet Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 		<span class="brand-text font-weight-light">LNB</span>
 	</a>
 
@@ -15,7 +15,7 @@
 				<img {% if user.userimg %} src="/liga/App/user/{{ user.userimg }}" {% else %} src="{{ ruta }}/dist/img/white.png" {% endif %} class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="/torneos/profile/show" class="d-block">{{ user.first_name }}</a>
+				<a href="{{ ruta }}/profile/show" class="d-block">{{ user.first_name }}</a>
 			</div>
 		</div>
 
@@ -50,7 +50,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/roles/index" class="nav-link">
+									<a href="{{ ruta }}/roles/index" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Roles y Permisos</p>
 									</a>
@@ -73,7 +73,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/renovacion/index" class="nav-link">
+									<a href="{{ ruta }}/renovacion/index" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Activar Renovación</p>
 									</a>
@@ -81,7 +81,7 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/renovacion/registro" class="nav-link">
+									<a href="{{ ruta }}/renovacion/registro" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Renovar Registro</p>
 									</a>
@@ -89,7 +89,7 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/renovacion/registro" class="nav-link">
+									<a href="{{ ruta }}/renovacion/registro" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Histórico Registro</p>
 									</a>
@@ -113,7 +113,7 @@
 							
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/usuarios/index" class="nav-link">
+									<a href="{{ ruta }}/usuarios/index" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Editar Usuario</p>
 									</a>
@@ -121,7 +121,7 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/usuarios/nuevoclub" class="nav-link">
+									<a href="{{ ruta }}/usuarios/nuevoclub" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Crear Club</p>
 									</a>
@@ -129,7 +129,7 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/usuarios/editclub" class="nav-link">
+									<a href="{{ ruta }}/usuarios/editclub" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Ver - Editar Club</p>
 									</a>
@@ -137,7 +137,7 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/usuarios/nuevonada" class="nav-link">
+									<a href="{{ ruta }}/usuarios/nuevonada" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Crear Nadador</p>
 									</a>
@@ -145,13 +145,13 @@
 							</ul>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/usuarios/editnada" class="nav-link">
+									<a href="{{ ruta }}/usuarios/editnada" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Ver - Editar Nadador</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/torneos/usuarios/competencia" class="nav-link">
+									<a href="{{ ruta }}/usuarios/competencia" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Subir Datos Nadadores</p>
 									</a>
@@ -175,35 +175,30 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/Admin/resultados" class="nav-link">
+									<a href="{{ ruta }}/Admin/resultados" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Subir resultados torneo</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/torneos/Admin/tiempos" class="nav-link">
+									<a href="{{ ruta }}/Admin/tiempos" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Editar Tiempos</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/torneos/admin/index" class="nav-link">
+									<a href="{{ ruta }}/admin/index" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Creación de Torneos</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/torneos/admin/listar" class="nav-link">
+									<a href="{{ ruta }}/admin/listar" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Editar Torneos</p>
 									</a>
 								</li>
-								<li class="nav-item">
-									<a href="/torneos/Hygen/index" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Generar Hy3</p>
-									</a>
-								</li>							
+														
 							</ul>							
 						</li>
 					{% endif %}	
@@ -221,13 +216,13 @@
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="/torneos/Profile/club" class="nav-link">
+									<a href="{{ ruta }}/Profile/club" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Información del Club</p>
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/torneos/Profile/listado" class="nav-link">
+									<a href="{{ ruta }}/Profile/listado" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Nadadores</p>
 									</a>
@@ -251,13 +246,13 @@
 							
 														
 							<li class="nav-item">
-								<a href="/torneos/torneo/index" class="nav-link">
+								<a href="{{ ruta }}/torneo/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Inscripción Torneos</p>
 								</a>
 							</li>							
 							<li class="nav-item">
-								<a href="/torneos/torneo/resumen" class="nav-link">
+								<a href="{{ ruta }}/torneo/resumen" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Resumen Inscripciones</p>
 								</a>
@@ -280,7 +275,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a href="/torneos/ranking/index" class="nav-link">
+								<a href="{{ ruta }}/ranking/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Ranking</p>
 								</a>
@@ -303,19 +298,19 @@
 						<ul class="nav nav-treeview">
 							
 							<li class="nav-item">
-								<a href="/torneos/puntajes/index" class="nav-link">
+								<a href="{{ ruta }}/puntajes/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Subir Puntajes</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="/torneos/puntajes/listar" class="nav-link">
+								<a href="{{ ruta }}/puntajes/listar" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Ver Puntajes General</p>
 								</a>
 							</li>					
 							<li class="nav-item">
-								<a href="/torneos/puntajes/promedio" class="nav-link">
+								<a href="{{ ruta }}/puntajes/promedio" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Ver Puntajes Promedio</p>
 								</a>
@@ -337,25 +332,25 @@
 						</a>
 						<ul class="nav nav-treeview">							
 							<li class="nav-item">
-								<a href="/torneos/registro/index" class="nav-link">
+								<a href="{{ ruta }}/registro/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Renovar</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="/torneos/registro/index" class="nav-link">
+								<a href="{{ ruta }}/registro/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>HV Nadadores</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="/torneos/registro/index" class="nav-link">
+								<a href="{{ ruta }}/registro/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>HV Entrenadores</p>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="/torneos/registro/index" class="nav-link">
+								<a href="{{ ruta }}/registro/index" class="nav-link">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Certificaciones</p>
 								</a>

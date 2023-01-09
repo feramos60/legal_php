@@ -89,7 +89,7 @@ class Roles extends Authenticated
                 'user' => $this->user                   //llama al resultado del metodo before()
             ]);
         } else {
-            $this->redirect('/torneos/dashboard/index');
+            $this->redirect('/compa/dashboard/index');
         }
     }
 
@@ -135,7 +135,7 @@ class Roles extends Authenticated
                 'user' => $this->user                   //llama al resultado del metodo before()
             ]);
         } else {
-            $this->redirect('/torneos/dashboard/index');
+            $this->redirect('/compa/dashboard/index');
         }
     }    
 

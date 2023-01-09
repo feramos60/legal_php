@@ -86,7 +86,7 @@ class Auth
      */
     public static function getReturnToPage()
     {
-        return $_SESSION['return_to'] ?? '/torneos/dashboard/index';  //Si no se hatratado de acceder desde rememberRequestedPage() entonces va a inicio
+        return $_SESSION['return_to'] ?? '/legaltech/compa/dashboard/index';  //Si no se hatratado de acceder desde rememberRequestedPage() entonces va a inicio
     }
 
     /**
