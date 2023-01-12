@@ -20,7 +20,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'liga';
+    const DB_NAME = 'legaltech';
 
     /**
      * Database user
@@ -62,5 +62,5 @@ class Config
      * CONTRASEÑA del correo
      * @var string
      */
-    const PASS_MAIL = 'Ramos7808020304';
+    const PASS_MAIL = 'Juan99103034#';
 }

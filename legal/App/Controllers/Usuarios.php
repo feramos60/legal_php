@@ -115,10 +115,10 @@ class Usuarios extends Authenticated
      */
     public function nuevoclubAction()
     {
-        $this->ligas = RolesDb::selectLigas();
+        
         View::renderTemplate('Usuarios/nuevoclub.html', [
             'user' => $this->user,                   //llama al resultado del metodo before()
-            'ligas' => $this->ligas
+            
         ]);
     }
 
@@ -219,11 +219,11 @@ class Usuarios extends Authenticated
         if (array_key_exists('id', $this->route_params)) {
             $_SESSION['club'] = json_encode($this->route_params['id'], JSON_NUMERIC_CHECK); //se recoge la variable que se pasa por parametro
             $this->clubes = RolesDb::findClubByID($_SESSION['club']);
-            $this->ligas = RolesDb::selectLigas();             
+                       
             View::renderTemplate('Usuarios/cambiar.html', [
                 'user' => $this->user,                   //llama al resultado del metodo before()                
                 'clubes' => $this->clubes,
-                'ligas' => $this->ligas
+                
             ]);
         } else {
             $this->redirect('/compa/dashboard/index');

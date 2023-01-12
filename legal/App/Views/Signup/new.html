@@ -6,8 +6,20 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../login/index" class="h1"><b>LNB</b><br>Inscripción Torneos</a>
+      <a href="../login/index" class="h1"><b>LEGAL</b><br>Technology</a>
     </div>
+    {% for message in flash_messages %}
+			    <div class="container-fluid">
+				    <div class="row">
+					    <div class="col-md-12">
+						    <div class="alert alert-{{ message.type }} text-center" role="alert">
+							    {{ message.body }}
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    {% endfor %}
+			    {# estos son los mensajes Flash #}
     <div class="card-body">
       <p class="login-box-msg">Resgistrarse</p>      
 
@@ -50,7 +62,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <input type="text" class="form-control" name="first_name" placeholder="Nombre del Club" value="{{user.first_name}}" required>
+          <input type="text" class="form-control" name="first_name" placeholder="Nombres" value="{{user.first_name}}" required>
           
         </div>
 
@@ -70,7 +82,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <input type="text" class="form-control" name="last_name" placeholder="Nombre del Entrenador" value="{{user.last_name}}" required> 
+          <input type="text" class="form-control" name="last_name" placeholder="Apellidos" value="{{user.last_name}}" required> 
           
         </div>
 

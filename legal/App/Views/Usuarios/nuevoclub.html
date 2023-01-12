@@ -1,12 +1,9 @@
 {% extends "base_admin.twig" %}
 
-{% block title %}Crear Club
-{% endblock %}
+{% block title %}Crear Impugnación{% endblock %}
 
-{% block subtitle %}Crear Club
-{% endblock %}
-{% block miga %}Crear Club
-{% endblock %}
+{% block subtitle %}Crear Impugnación{% endblock %}
+{% block miga %}Crear Impugnación{% endblock %}
 
 {% block content %}
 
@@ -15,16 +12,16 @@
 			<div class="col-md-12">
 				<div class="card card-primary">
 					<div class="card-header">
-						<h3 class="card-title">Crear Club</h3>
+						<h3 class="card-title">Crear Impugnación</h3>
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form action="../usuarios/create" method="post">
+					<form action="../impugna/create" method="post">
 						<div class="card-body">
 							<div class="form-group row">
-								<label for="exampleInputEmail1" class="col-sm-2">Nombre del Club:</label>
+								<label for="transito" class="col-sm-2">Secretaría de Tránsito:</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" name="nombre_club" id="nombre_club" placeholder="Escriba aquí el nombre del club" required>
+									<input type="text" class="form-control" name="transito" id="transito" placeholder="Escriba aquí el nombre de la secretaría de transito que impuso el comparendo" required>
 								</div>
 							</div>
 							<div class="form-group row">

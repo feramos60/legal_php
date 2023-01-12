@@ -38,10 +38,10 @@ class Profile extends Authenticated
      */
     public function showAction()
     {
-        $this->club = RolesDb::selectClub($_SESSION['user_club']);
+        
         View::renderTemplate('Profile/show.html', [
             'user' => $this->user,                   //llama al resultado del metodo before()
-            'club' => $this->club
+            
 
         ]);
     }
@@ -119,10 +119,9 @@ class Profile extends Authenticated
      */
     public function clubAction()
     {
-        $this->club = RolesDb::selectClub($_SESSION['user_club']);
+        
         View::renderTemplate('Profile/clubprofile.html', [
-            'user' => $this->user,                   //llama al resultado del metodo before()
-            'club' => $this->club
+            'user' => $this->user,     'club' => $this->club
         ]);
     }
 
@@ -135,10 +134,10 @@ class Profile extends Authenticated
      */
     public function listadoAction()
     {
-        $this->club = RolesDb::selectClub($_SESSION['user_club']);
+       
         View::renderTemplate('Profile/listado.html', [
             'user' => $this->user,                   //llama al resultado del metodo before()
-            'club' => $this->club
+            
         ]);
     }
 

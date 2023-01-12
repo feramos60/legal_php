@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Models\User;
+use App\Flash;
 
 /**
  * Signup controller
@@ -31,8 +32,13 @@ class Signup extends \Core\Controller
     {
         $user = new User($_POST);
         if ($user->save()) {
-            $user->sendActivationEmail();
-            $this->redirect('/compa/signup/success');            
+            if ($user->sendActivationEmail()){
+                $this->redirect('/legaltech/compa/signup/success');  //cuando llegue a la raiz se debe quitar la primera carpeta
+            }else{
+                View::renderTemplate('Login/index.html', [
+                    'user' => $user
+                ]);
+            }                      
         } else {
             View::renderTemplate('Signup/new.html', [
                 'user' => $user

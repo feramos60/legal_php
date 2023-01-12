@@ -27,10 +27,8 @@ class Auth
         session_regenerate_id(true);  //destruye la vieja sesión y crea la nueva
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_name'] = $user->user_name;
-        $_SESSION['user_role'] = $user->role_id;
-        $_SESSION['user_club'] = $user->club_id;
+        $_SESSION['user_role'] = $user->role_id;        
         $_SESSION['permissions'] = User::findPermissionsByUserID($user->role_id);
-
 
         if ($remember_me) {
             if ($user->rememberLogin()) {

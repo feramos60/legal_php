@@ -43,7 +43,7 @@ class Mail
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('contactenos@liganatacionbogota.com', 'Sistema de Inscripciones Torneos');
+        $mail->setFrom('contacto@ecoapplet.co', 'Sistema de LegalTech');
         $mail->addAddress($to, $name);     //Add a recipient se pueden agregar más correos con más linesas de estas        
         $mail->addReplyTo('info@ecoapplet.co', 'Information');
         //$mail->addCC('cc@example.com');
@@ -61,8 +61,11 @@ class Mail
     
         $mail->send();
         Flash::addMessage('Un mensaje ha sido enviado a su correo', Flash::INFO);
+        return true;
       } catch (Exception $e) {
         Flash::addMessage('El mensaje no pudo ser enviado. Error: {$mail->ErrorInfo}', Flash::WARNING);
+        echo 'No se envió';
+        return false;
       }   
         
     }

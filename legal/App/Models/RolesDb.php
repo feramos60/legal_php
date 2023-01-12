@@ -358,47 +358,7 @@ class RolesDb extends \Core\Model
             }
         }
         return false;
-    }
-
-    /**
-     * Encontrar todas las ligas
-     *
-     * @param string $email email address to search for
-     *
-     * @return mixed User object if found, false otherwise
-     */
-    public static function selectLigas()
-    {
-        $sql = 'SELECT * FROM ligas';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->execute();
-
-        return $stmt->fetchAll();
-    }
-
-    /**
-     * Encontrar el clubes para mostrarlo
-     *
-     * 
-     * 
-     */
-    public static function selectClub($id_club)
-    {
-        $sql = 'SELECT *, ligas.nombre_liga  FROM clubes
-        INNER JOIN ligas ON clubes.id_liga = ligas.id 
-        WHERE clubes.id =' .  $id_club;
-        
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
+    }    
 
     /**
      * Selecciona todos los tiempos del sistema

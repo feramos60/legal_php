@@ -53,8 +53,8 @@ class User extends \Core\Model
             $hashed_token = $token->getHash();
             $this->activation_token = $token->getValue();
 
-            $sql = 'INSERT INTO users (user_name, first_name, last_name, email, role_id, club_id, api_key, password_hash, created_at, updated_at, activation_hash)
-                    VALUES (:user_name, :first_name, :last_name, :email, :role_id, :club_id, :api_key, :password_hash, :created_at, :updated_at, :activation_hash)';
+            $sql = 'INSERT INTO users (user_name, first_name, last_name, email, role_id, api_key, password_hash, created_at, updated_at, activation_hash)
+                    VALUES (:user_name, :first_name, :last_name, :email, :role_id, :api_key, :password_hash, :created_at, :updated_at, :activation_hash)';
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
@@ -63,8 +63,7 @@ class User extends \Core\Model
             $stmt->bindValue(':first_name', $this->first_name, PDO::PARAM_STR);
             $stmt->bindValue(':last_name', $this->last_name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-            $stmt->bindValue(':role_id', 6, PDO::PARAM_STR);
-            $stmt->bindValue(':club_id', 19, PDO::PARAM_INT);
+            $stmt->bindValue(':role_id', 3, PDO::PARAM_STR);
             $stmt->bindValue(':api_key', $hashed_token, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
             $stmt->bindValue(':created_at', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
@@ -439,7 +438,12 @@ class User extends \Core\Model
         $text = View::getTemplate('Signup/activation_email.txt', ['url' => $url, 'nombre' => $this->first_name]);
         $html = View::getTemplate('Signup/activation_email.html', ['url' => $url, 'nombre' => $this->first_name]);
 
-        Mail::send($this->email, $this->first_name, 'Activación de la cuenta - Ecoapplet', $text, $html);
+        if (Mail::send($this->email, $this->first_name, 'Activación de la cuenta - Ecoapplet', $text, $html)) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
     
     /**

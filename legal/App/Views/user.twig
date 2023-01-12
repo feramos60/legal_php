@@ -40,7 +40,7 @@
 
 							<p>
 								{{ user.first_name }}
-								- {% if user.role_id == 1 %}SuperAdmin{% elseif user.role_id == 2 %}Admin {% else %} Delegado{% endif %}
+								- {% if user.role_id == 1 %}SuperAdmin{% elseif user.role_id == 2 %}Admin {% else %} Usuario{% endif %}
 								<small>Miembro desde {{ user.created_at|date("d M Y") }}</small>
 							</p>
 						</li>
