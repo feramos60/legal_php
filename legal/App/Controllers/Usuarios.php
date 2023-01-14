@@ -27,7 +27,7 @@ class Usuarios extends Authenticated
         parent::before();           //Llama el metodo before() de la clase Authenticated
 
         $this->user = Auth::getUser();
-        $this->authorizationRequired(permission: 2);
+        $this->authorizationRequired(permission: 1);
     }
 
     /**

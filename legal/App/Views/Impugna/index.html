@@ -1,0 +1,224 @@
+{% extends "base_admin.twig" %}
+
+{% block title %}Crear Impugnación{% endblock %}
+
+{% block subtitle %}Crear Impugnación{% endblock %}
+{% block miga %}Crear Impugnación{% endblock %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="col-md-12">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">Crear Impugnación</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form action="../impugna/create" method="post">
+						<div class="card-body">
+							<div class="form-group row">
+								<label for="transito" class="col-sm-3">Secretaría de Tránsito:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="transito" id="transito" placeholder="Escriba aquí el nombre de la secretaría de transito que impuso el comparendo" required>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="numCompa" class="col-sm-3">Número de Comparendo:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="numCompa" id="numCompa" maxlength="20" pattern="[0-9]{1,21}" autocapitalize="characters" placeholder="Escriba aquí el número de comparendo, que corresponde a 20 digitos" required>
+									<span id="helpBlock">Escriba aquí el número de comparendo, que corresponde a 20 digitos</span>
+								</div>
+							</div>
+							<div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Fecha Comparendo:</label>
+                                <div class="input-group date col-sm-9" id="reservationdate" data-target-input="nearest">
+                                    <div class="input-group-append" data-target="#reservationdate"
+                                        data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                    <input type="text" name="fecha_comp" class="form-control datetimepicker-input"
+                                        data-target="#reservationdate" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+								<label for="lugar" class="col-sm-3">Lugar del Comparendo:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="lugar" id="lugar" placeholder="Escriba el lugar donde le tomaron el fotocomparendo" required>
+								</div>
+							</div>
+                            <div class="form-group row">
+                                <label for="vehiculo" class="col-sm-3 col-form-label">Tipo de Vehículo:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="vehiculo" required>
+                                        <option value=" "> </option>
+                                        <option value="AUTOMOVIL">AUTOMOVIL</option>
+                                        <option value="CAMIONETA">CAMIONETA</option>
+                                        <option value="CAMION">CAMION</option>
+                                        <option value="TRACTOMULA">TRACTOMULA</option>
+                                        <option value="TRACTOR">TRACTOR</option>
+                                        <option value="MOTO">MOTO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="servicio" class="col-sm-3 col-form-label">Tipo de Servicio:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="servicio" required>
+                                        <option value=" "> </option>
+                                        <option value="PARTICULAR">PARTICULAR</option>
+                                        <option value="PÚBLICO">PÚBLICO</option>                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="marca" class="col-sm-3 col-form-label">Marca:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="marca" required>
+                                        <option value=" "> </option>
+                                        <option value="acura">acura</option>
+                                        <option value="alfa-romeo">alfa-romeo</option>
+                                        <option value="aptera">aptera</option>
+                                        <option value="aston-marti">aston-marti</option>n
+                                        <option value="audi">audi</option>
+                                        <option value="austin">austin </option>
+                                        <option value="bentley">bentley </option>
+                                        <option value="bmw">bmw </option>
+                                        <option value="bugatti">bugatti </option>
+                                        <option value="buick">buick </option>
+                                        <option value="cadillac">cadillac </option>
+                                        <option value="chevrolet">chevrolet </option>
+                                        <option value="chrysler">chrysler </option>
+                                        <option value="citroen">citroen </option>
+                                        <option value="corbin">corbin </option>
+                                        <option value="daewoo">daewoo </option>
+                                        <option value="daihatsu">daihatsu </option>
+                                        <option value="dodge">dodge </option>
+                                        <option value="eagle">eagle </option>
+                                        <option value="fairthorpe">fairthorpe </option>
+                                        <option value="ferrari">ferrari </option>
+                                        <option value="fiat">fiat </option>
+                                        <option value="fillmore">fillmore </option>
+                                        <option value="foose">foose </option>
+                                        <option value="ford">ford </option>
+                                        <option value="geo">geo </option>
+                                        <option value="gmc">gmc </option>
+                                        <option value="hillman">hillman </option>
+                                        <option value="holden">holden </option>
+                                        <option value="honda">honda </option>
+                                        <option value="hummer">hummer </option>
+                                        <option value="hyundai">hyundai </option>
+                                        <option value="infiniti">infiniti </option>
+                                        <option value="isuzu">isuzu </option>
+                                        <option value="jaguar">jaguar </option>
+                                        <option value="jeep">jeep </option>
+                                        <option value="jensen">jensen </option>
+                                        <option value="kia">kia </option>
+                                        <option value="lamborghini">lamborghini </option>
+                                        <option value="land-rover">land-rover </option>
+                                        <option value="lexus">lexus </option>
+                                        <option value="lincoln">lincoln </option>
+                                        <option value="lotus">lotus </option>
+                                        <option value="maserati">maserati </option>
+                                        <option value="maybach">maybach </option>
+                                        <option value="mazda">mazda </option>
+                                        <option value="mclaren">mclaren </option>
+                                        <option value="mercedes-be">mercedes-benz </option>nz
+                                        <option value="mercury">mercury </option>
+                                        <option value="merkur">merkur </option>
+                                        <option value="mg">mg </option>
+                                        <option value="mini">mini </option>
+                                        <option value="mitsubishi">mitsubishi </option>
+                                        <option value="morgan">morgan </option>
+                                        <option value="nissan">nissan </option>
+                                        <option value="oldsmobile">oldsmobile </option>
+                                        <option value="panoz">panoz </option>
+                                        <option value="peugeot">peugeot </option>
+                                        <option value="plymouth">plymouth </option>
+                                        <option value="pontiac">pontiac </option>
+                                        <option value="porsche">porsche </option>
+                                        <option value="ram">ram </option>
+                                        <option value="rambler">rambler </option>
+                                        <option value="renault">renault </option>
+                                        <option value="rolls-royce">rolls-royce </option>
+                                        <option value="saab">saab </option>
+                                        <option value="saturn">saturn </option>
+                                        <option value="scion">scion </option>
+                                        <option value="shelby">shelby </option>
+                                        <option value="smart">smart </option>
+                                        <option value="spyker">spyker </option>
+                                        <option value="spyker-cars">spyker-cars </option>
+                                        <option value="studebaker">studebaker </option>
+                                        <option value="subaru">subaru </option>
+                                        <option value="suzuki">suzuki </option>
+                                        <option value="tesla">tesla </option>
+                                        <option value="toyota">toyota </option>
+                                        <option value="volkswagen">volkswagen </option>
+                                        <option value="volvo">volvo </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+								<label for="placa" class="col-sm-3">Placa:</label>
+								<div class="col-sm-9">
+									<input type="text" maxlength="6" class="form-control" name="placa" id="placa" placeholder="Escriba la placa del vehículo, sin puntos ni comas" required>
+								</div>
+							</div>							
+							
+						</div>
+						<!-- /.card-body -->
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary">Crear Documento</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- jQuery -->
+<script src="{{ ruta }}/plugins/jquery/jquery.min.js"></script>
+
+<!-- Page specific script -->
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+
+        //Date and time picker
+
+
+        //Date range picker
+
+        //Date range picker with time picker       
+
+
+
+
+
+
+    })
+        // BS-Stepper Init
+
+
+</script>
+
+{% endblock %}
